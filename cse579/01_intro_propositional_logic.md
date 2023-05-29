@@ -29,7 +29,6 @@ mindmap
     Search
     Natural Language Processing
     Knowledge Representation & Reasoning
-
 ```
 
 ### AI & KRR
