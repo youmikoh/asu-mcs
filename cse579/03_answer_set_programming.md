@@ -19,6 +19,7 @@ $$
 
 \gdef\so{\blacktriangleright}
 \gdef\img{\imageof}
+\gdef\cancel#1{\texttt{#1}}
 
 \satisfy ~\unsatisfy ~\crit ~\so ~\iff ~\equiv ~\img
 \\
@@ -38,15 +39,6 @@ $$
 \gdef\V#1{{\color{darkviolet}{#1}}}
 
 \R{red~\txt{r}~\AND} ~\B{blue~\txt{b}~\OR} ~\G{green~\txt{g}~\IF} ~\P{pink~\txt{r}~\THEN} ~\V{violet~\txt{r}~\EQ}
-\\
-
-\gdef\red#1{{\color{red}{#1}}}
-\gdef\green#1{{\color{green}{#1}}}
-\gdef\blue#1{{\color{blue}{#1}}}
-\gdef\pink#1{{\color{deeppink}{#1}}}
-\gdef\violet#1{{\color{darkviolet}{#1}}}
-
-\red{red~\txt{r}~\AND} ~\blue{blue~\txt{b}~\OR} ~\green{green~\txt{g}~\IF} ~\pink{pink~\txt{r}~\THEN} ~\violet{violet~\txt{r}~\EQ}
 \\
 
 \gdef\Rtxt#1{{\color{red}{\texttt{#1}}}}
