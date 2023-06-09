@@ -13,21 +13,25 @@
 \frenchspacing  % DO NOT CHANGE THIS
 \setlength{\pdfpagewidth}{8.5in}  % DO NOT CHANGE THIS
 \setlength{\pdfpageheight}{11in}  % DO NOT CHANGE THIS
+
+\usepackage{microtype}
+
+
 %\nocopyright
 %PDF Info Is REQUIRED.
 % For /Author, add all authors within the parentheses, separated by commas. No accents or commands.
 % For /Title, add Title in Mixed Case. No accents or commands. Retain the parentheses.
- \pdfinfo{
+\pdfinfo{
 /Title (AAAI Press Formatting Instructions for Authors Using LaTeX -- A Guide)
 /Author (AAAI Press Staff, Pater Patel Schneider, Sunil Issar, J. Scott Penberthy, George Ferguson, Hans Guesgen)
-} %Leave this	
+} %Leave this
 % /Title ()
 % Put your actual complete title (no codes, scripts, shortcuts, or LaTeX commands) within the parentheses in mixed case
 % Leave the space between \Title and the beginning parenthesis alone
 % /Author ()
-% Put your actual complete list of authors (no codes, scripts, shortcuts, or LaTeX commands) within the parentheses in mixed case. 
-% Each author should be only by a comma. If the name contains accents, remove them. If there are any LaTeX commands, 
-% remove them. 
+% Put your actual complete list of authors (no codes, scripts, shortcuts, or LaTeX commands) within the parentheses in mixed case.
+% Each author should be only by a comma. If the name contains accents, remove them. If there are any LaTeX commands,
+% remove them.
 
 % DISALLOWED PACKAGES
 % \usepackage{authblk} -- This package is specifically forbidden
@@ -73,14 +77,14 @@
 
 \setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
 
-% The file aaai20.sty is the style file for AAAI Press 
+% The file aaai20.sty is the style file for AAAI Press
 % proceedings, working notes, and technical reports.
 %
 \setlength\titlebox{2.5in} % If your paper contains an overfull \vbox too high warning at the beginning of the document, use this
 % command to correct it. You may not alter the value below 2.5 in
 \title{AAAI Press Formatting Instructions \\for Authors Using \LaTeX{} --- A Guide }
-%Your title must be in mixed case, not sentence case. 
-% That means all verbs (including short verbs like be, is, using,and go), 
+%Your title must be in mixed case, not sentence case.
+% That means all verbs (including short verbs like be, is, using,and go),
 % nouns, adverbs, adjectives should be capitalized, including both words in hyphenated terms, while
 % articles, conjunctions, and prepositions are lower case unless they
 % directly follow a colon or long dash
@@ -97,12 +101,12 @@ publications20@aaai.org % email address must be in roman text type, not monospac
 \maketitle
 
 \begin{abstract}
-AAAI creates proceedings, working notes, and technical reports directly from electronic source furnished by the authors. To ensure that all papers in the publication have a uniform appearance, authors must adhere to the following instructions. 
+AAAI creates proceedings, working notes, and technical reports directly from electronic source furnished by the authors. To ensure that all papers in the publication have a uniform appearance, authors must adhere to the following instructions.
 \end{abstract}
 
-\noindent Congratulations on having a paper selected for inclusion in an AAAI Press proceedings or technical report! This document details the requirements necessary to get your accepted paper published using PDF\LaTeX{}. If you are using Microsoft Word, instructions are provided in a different document. AAAI Press does not support any other formatting software. 
+\noindent Congratulations on having a paper selected for inclusion in an AAAI Press proceedings or technical report! This document details the requirements necessary to get your accepted paper published using PDF\LaTeX{}. If you are using Microsoft Word, instructions are provided in a different document. AAAI Press does not support any other formatting software.
 
-The instructions herein are provided as a general guide for experienced \LaTeX{} users. If you do not know how to use \LaTeX{}, please obtain assistance locally. AAAI cannot provide you with support and the accompanying style files are \textbf{not} guaranteed to work. If the results you obtain are not in accordance with the specifications you received, you must correct your source file to achieve the correct result. 
+The instructions herein are provided as a general guide for experienced \LaTeX{} users. If you do not know how to use \LaTeX{}, please obtain assistance locally. AAAI cannot provide you with support and the accompanying style files are \textbf{not} guaranteed to work. If the results you obtain are not in accordance with the specifications you received, you must correct your source file to achieve the correct result.
 
 These instructions are generic. Consequently, they do not include specific dates, page charges, and so forth. Please consult your specific written conference instructions for details regarding your submission. Please review the entire document for specific instructions that might apply to your particular situation. All authors must comply with the following:
 
@@ -119,7 +123,7 @@ These instructions are generic. Consequently, they do not include specific dates
 All papers submitted for publication by AAAI Press must be accompanied by a valid signed copyright form. There are no exceptions to this requirement. You must send us the original version of this form. However, to meet the deadline, you may fax (1-650-321-4457) or scan and e-mail the form (pubforms20@aaai.org) to AAAI by the submission deadline, and then mail the original via postal mail to the AAAI office. If you fail to send in a signed copyright or permission form, we will be unable to publish your paper. There are \textbf{no exceptions} to this policy.You will find PDF versions of the AAAI copyright and permission to distribute forms in the AAAI AuthorKit.
 
 \section{Formatting Requirements in Brief}
-We need source and PDF files that can be used in a variety of ways and can be output on a variety of devices. The design and appearance of the paper is strictly governed by the aaai style file (aaai20.sty). 
+We need source and PDF files that can be used in a variety of ways and can be output on a variety of devices. The design and appearance of the paper is strictly governed by the aaai style file (aaai20.sty).
 \textbf{You must not make any changes to the aaai style file, nor use any commands, packages, style files, or macros within your own paper that alter that design, including, but not limited to spacing, floats, margins, fonts, font size, and appearance.} AAAI imposes requirements on your source and PDF files that must be followed. Most of these requirements are based on our efforts to standardize conference manuscript properties and layout. All papers submitted to AAAI for publication will be recompiled for standardization purposes. Consequently, every paper submission must comply with the following requirements:
 
 \begin{quote}
@@ -135,7 +139,7 @@ We need source and PDF files that can be used in a variety of ways and can be ou
 \item Your .tex file must include completed metadata to pass-through to the PDF (see PDFINFO below)
 \item \LaTeX{} documents must use the Times or Nimbus font package (you may not use Computer Modern for the text of your paper).
 \item No \LaTeX{} 209 documents may be used or submitted.
-\item Your source must not require use of fonts for non-Roman alphabets within the text itself. If your paper includes symbols in other languages (such as, but not limited to, Arabic, Chinese, Hebrew, Japanese, Thai, Russian and other Cyrillic languages), you must restrict their use to bit-mapped figures. Fonts that require non-English language support (CID and Identity-H) must be converted to outlines or 300 dpi bitmap or removed from the document (even if they are in a graphics file embedded in the document). 
+\item Your source must not require use of fonts for non-Roman alphabets within the text itself. If your paper includes symbols in other languages (such as, but not limited to, Arabic, Chinese, Hebrew, Japanese, Thai, Russian and other Cyrillic languages), you must restrict their use to bit-mapped figures. Fonts that require non-English language support (CID and Identity-H) must be converted to outlines or 300 dpi bitmap or removed from the document (even if they are in a graphics file embedded in the document).
 \item Two-column format in AAAI style is required for all papers.
 \item The paper size for final submission must be US letter without exception.
 \item The source file must exactly match the PDF.
@@ -156,22 +160,22 @@ If you do not follow these requirements, you will be required to correct the def
 You must submit the following items to ensure that your paper is published:
 \begin{itemize}
 \item A fully-compliant PDF file that includes PDF metadata.
-\item Your \LaTeX{} source file submitted as a \textbf{single} .tex file (do not use the ``input" command to include sections of your paper --- every section must be in the single source file). (The only allowable exception is .bib file, which should be included separately). 
+\item Your \LaTeX{} source file submitted as a \textbf{single} .tex file (do not use the ``input" command to include sections of your paper --- every section must be in the single source file). (The only allowable exception is .bib file, which should be included separately).
 \item The bibliography (.bib) file(s).
-\item Your source must compile on our system, which includes only standard \LaTeX{} 2018-2019 TeXLive support files. 
+\item Your source must compile on our system, which includes only standard \LaTeX{} 2018-2019 TeXLive support files.
 \item Only the graphics files used in compiling paper.
 \item The \LaTeX{}-generated files (e.g. .aux,  .bbl file, PDF, etc.).
 \end{itemize}
 
-Your \LaTeX{} source will be reviewed and recompiled on our system (if it does not compile, you will be required to resubmit, which will incur fees). \textbf{Do not submit your source in multiple text files.} Your single \LaTeX{} source file must include all your text, your bibliography (formatted using aaai.bst), and any custom macros. 
+Your \LaTeX{} source will be reviewed and recompiled on our system (if it does not compile, you will be required to resubmit, which will incur fees). \textbf{Do not submit your source in multiple text files.} Your single \LaTeX{} source file must include all your text, your bibliography (formatted using aaai.bst), and any custom macros.
 
-Your files should work without any supporting files (other than the program itself) on any computer with a standard \LaTeX{} distribution. 
+Your files should work without any supporting files (other than the program itself) on any computer with a standard \LaTeX{} distribution.
 
 \textbf{Do not send files that are not actually used in the paper.} We don't want you to send us any files not needed for compiling your paper, including, for example, this instructions file, unused graphics files, style files, additional material sent for the purpose of the paper review, and so forth.
 
 \textbf{Do not send supporting files that are not actually used in the paper.} We don't want you to send us any files not needed for compiling your paper, including, for example, this instructions file, unused graphics files, style files, additional material sent for the purpose of the paper review, and so forth.
 
-\textbf{Obsolete style files.} The commands for some common packages (such as some used for algorithms), may have changed. Please be certain that you are not compiling your paper using old or obsolete style files. 
+\textbf{Obsolete style files.} The commands for some common packages (such as some used for algorithms), may have changed. Please be certain that you are not compiling your paper using old or obsolete style files.
 \textbf{Final Archive.} Place your PDF and source files in a single archive which should be compressed using .zip. The final file size may not exceed 10 MB.
 Name your source file with the last (family) name of the first author, even if that is not you.
 
@@ -196,7 +200,7 @@ If (and only if) your author title information will not fit within the specified
 \usepackage{times}
 \usepackage{helvet}
 \usepackage{courier}
-\usepackage[hyphens]{url} 
+\usepackage[hyphens]{url}
 \usepackage{graphicx}
 \urlstyle{rm}
 \def\UrlFont{\rm}
@@ -204,22 +208,22 @@ If (and only if) your author title information will not fit within the specified
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
-% Add additional packages here, but check 
-% the list of disallowed packages 
+% Add additional packages here, but check
+% the list of disallowed packages
 % (including, but not limited to
-% authblk, caption, CJK, float, fullpage, geometry, 
-% hyperref, layout, nameref, natbib, savetrees, 
+% authblk, caption, CJK, float, fullpage, geometry,
+% hyperref, layout, nameref, natbib, savetrees,
 % setspace, titlesec, tocbibind, ulem)
-% and illegal commands provided in the 
+% and illegal commands provided in the
 % common formatting errors document
-% included in the  Author Kit before doing so. 
+% included in the  Author Kit before doing so.
 %
 % PDFINFO
 % You are required to complete the following
-% for pass-through to the PDF. 
+% for pass-through to the PDF.
 % No LaTeX commands of any kind may be
-% entered. The parentheses and spaces 
-% are an integral part of the 
+% entered. The parentheses and spaces
+% are an integral part of the
 % pdfinfo script and must not be removed.
 %
 \pdfinfo{
@@ -294,32 +298,32 @@ PDF files contain document summary information that enables us to create an Acro
 \caption{Commands that must not be used.}\smallskip
 %\resizebox{0.95\textwidth}{!}{ % If your table exceeds the column or page width, use this command to reduce it slightly
 \begin{tabular}{l|l|l|l}
-\textbackslash abovecaption & 
-\textbackslash abovedisplay & 
-\textbackslash addevensidemargin & 
-\textbackslash addsidemargin \\ 
-\textbackslash addtolength & 
-\textbackslash baselinestretch & 
-\textbackslash belowcaption & 
-\textbackslash belowdisplay \\ 
+\textbackslash abovecaption &
+\textbackslash abovedisplay &
+\textbackslash addevensidemargin &
+\textbackslash addsidemargin \\
+\textbackslash addtolength &
+\textbackslash baselinestretch &
+\textbackslash belowcaption &
+\textbackslash belowdisplay \\
 \textbackslash break &
-\textbackslash clearpage & 
-\textbackslash clip & 
-\textbackslash columnsep \\ 
-\textbackslash float & 
-\textbackslash input & 
-\textbackslash input & 
-\textbackslash linespread \\ 
+\textbackslash clearpage &
+\textbackslash clip &
+\textbackslash columnsep \\
+\textbackslash float &
+\textbackslash input &
+\textbackslash input &
+\textbackslash linespread \\
 \textbackslash newpage &
-\textbackslash pagebreak & 
-\textbackslash renewcommand & 
-\textbackslash setlength \\ 
-\textbackslash text height & 
-\textbackslash tiny & 
-\textbackslash top margin & 
-\textbackslash trim \\ 
-\textbackslash vskip\{- & 
-\textbackslash vspace\{- \\ 
+\textbackslash pagebreak &
+\textbackslash renewcommand &
+\textbackslash setlength \\
+\textbackslash text height &
+\textbackslash tiny &
+\textbackslash top margin &
+\textbackslash trim \\
+\textbackslash vskip\{- &
+\textbackslash vspace\{- \\
 \end{tabular}
 %}
 \label{table1}
@@ -342,34 +346,34 @@ tocbind & ulem\\
 \label{table2}
 \end{table}
 
-There are a number of packages, commands, scripts, and macros that are incompatable with aaai20.sty. The common ones are listed in tables \ref{table1} and \ref{table2}. Generally, if a command, package, script, or macro alters floats, margins, fonts, sizing, linespacing, or the presentation of the references and citations, it is unacceptable. Note that negative vskip and vspace may not be used except in certain rare occurances, and may never be used around tables, figures, captions, sections, subsections, subsections, or references. 
+There are a number of packages, commands, scripts, and macros that are incompatable with aaai20.sty. The common ones are listed in tables \ref{table1} and \ref{table2}. Generally, if a command, package, script, or macro alters floats, margins, fonts, sizing, linespacing, or the presentation of the references and citations, it is unacceptable. Note that negative vskip and vspace may not be used except in certain rare occurances, and may never be used around tables, figures, captions, sections, subsections, subsections, or references.
 
 
 \subsection{Page Breaks}
-For your final camera ready copy, you must not use any page break commands. References must flow directly after the text without breaks. Note that some conferences require references to be on a separate page during the review process. AAAI Press, however, does not require this condition for the final paper. 
+For your final camera ready copy, you must not use any page break commands. References must flow directly after the text without breaks. Note that some conferences require references to be on a separate page during the review process. AAAI Press, however, does not require this condition for the final paper.
 
 
 \subsection{Paper Size, Margins, and Column Width}
-Papers must be formatted to print in two-column format on 8.5 x 11 inch US letter-sized paper. The margins must be exactly as follows: 
+Papers must be formatted to print in two-column format on 8.5 x 11 inch US letter-sized paper. The margins must be exactly as follows:
 \begin{itemize}
 \item Top margin: .75 inches
 \item Left margin: .75 inches
 \item Right margin: .75 inches
 \item Bottom margin: 1.25 inches
-\end{itemize} 
+\end{itemize}
 
 
-The default paper size in most installations of \LaTeX{} is A4. However, because we require that your electronic paper be formatted in US letter size, the preamble we have provided includes commands that alter the default to US letter size. Please note that using any other package to alter page size (such as, but not limited to the Geometry package) will result in your final paper being returned to you for correction and payment of a resubmission fee. 
+The default paper size in most installations of \LaTeX{} is A4. However, because we require that your electronic paper be formatted in US letter size, the preamble we have provided includes commands that alter the default to US letter size. Please note that using any other package to alter page size (such as, but not limited to the Geometry package) will result in your final paper being returned to you for correction and payment of a resubmission fee.
 
 
 \subsubsection{Column Width and Margins.}
-To ensure maximum readability, your paper must include two columns. Each column should be 3.3 inches wide (slightly more than 3.25 inches), with a .375 inch (.952 cm) gutter of white space between the two columns. The aaai20.sty file will automatically create these columns for you. 
+To ensure maximum readability, your paper must include two columns. Each column should be 3.3 inches wide (slightly more than 3.25 inches), with a .375 inch (.952 cm) gutter of white space between the two columns. The aaai20.sty file will automatically create these columns for you.
 
 \subsection{Overlength Papers}
 If your paper is too long, turn on \textbackslash frenchspacing, which will reduce the space after periods. Next, shrink the size of your graphics. Use \textbackslash centering instead of \textbackslash begin\{center\} in your figure environment. For mathematical environments, you may reduce fontsize {\bf but not below 6.5 point}. You may also alter the size of your bibliography by inserting \textbackslash fontsize\{9.5pt\}\{10.5pt\} \textbackslash selectfont
-right before the bibliography (the minimum size is \textbackslash fontsize\{9.0pt\}\{10.0pt\}. 
+right before the bibliography (the minimum size is \textbackslash fontsize\{9.0pt\}\{10.0pt\}.
 
-Commands that alter page layout are forbidden. These include \textbackslash columnsep, \textbackslash topmargin, \textbackslash topskip, \textbackslash textheight, \textbackslash textwidth, \textbackslash oddsidemargin, and \textbackslash evensizemargin (this list is not exhaustive). If you alter page layout, you will be required to pay the page fee \textit{plus} a reformatting fee. Other commands that are questionable and may cause your paper to be rejected include \textbackslash parindent, and \textbackslash parskip. Commands that alter the space between sections are forbidden. The title sec package is not allowed. Regardless of the above, if your paper is obviously ``squeezed" it is not going to to be accepted. Options for reducing the length of a paper include reducing the size of your graphics, cutting text, or paying the extra page charge (if it is offered). 
+Commands that alter page layout are forbidden. These include \textbackslash columnsep, \textbackslash topmargin, \textbackslash topskip, \textbackslash textheight, \textbackslash textwidth, \textbackslash oddsidemargin, and \textbackslash evensizemargin (this list is not exhaustive). If you alter page layout, you will be required to pay the page fee \textit{plus} a reformatting fee. Other commands that are questionable and may cause your paper to be rejected include \textbackslash parindent, and \textbackslash parskip. Commands that alter the space between sections are forbidden. The title sec package is not allowed. Regardless of the above, if your paper is obviously ``squeezed" it is not going to to be accepted. Options for reducing the length of a paper include reducing the size of your graphics, cutting text, or paying the extra page charge (if it is offered).
 
 \subsection{Figures}
 Your paper must compile in PDF\LaTeX{}. Consequently, all your figures must be .jpg, .png, or .pdf. You may not use the .gif (the resolution is too low), .ps, or .eps file format for your figures.
@@ -380,7 +384,7 @@ Do not use minipage to group figures. Additionally, the font and size of figure 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\columnwidth]{figure1} % Reduce the figure size so that it is slightly narrower than the column. Don't use precise values for figure width.This setup will avoid overfull boxes. 
+\includegraphics[width=0.9\columnwidth]{figure1} % Reduce the figure size so that it is slightly narrower than the column. Don't use precise values for figure width.This setup will avoid overfull boxes.
 \caption{Using the trim and clip commands produces fragile layers that can result in disasters (like this one from an actual paper) when the color space is corrected or the PDF combined with others for the final proceedings. Crop your figures properly in a graphics program -- not in LaTeX}
 \label{fig1}
 \end{figure}
@@ -394,16 +398,16 @@ Do not use minipage to group figures. Additionally, the font and size of figure 
 
 % Using the \centering command instead of \begin{center} ... \end{center} will save space
 % Positioning your figure at the top of the page will save space and make the paper more readable
-% Using 0.95\columnwidth in conjunction with the 
+% Using 0.95\columnwidth in conjunction with the
 
 \subsection{Type Font and Size}
-Your paper must be formatted in Times Roman or Nimbus. We will not accept papers formatted using Computer Modern or Palatino or some other font as the text or heading typeface. Sans serif, when used, should be Courier. Use Symbol or Lucida or Computer Modern for \textit{mathematics only. } 
+Your paper must be formatted in Times Roman or Nimbus. We will not accept papers formatted using Computer Modern or Palatino or some other font as the text or heading typeface. Sans serif, when used, should be Courier. Use Symbol or Lucida or Computer Modern for \textit{mathematics only. }
 
-Do not use type 3 fonts for any portion of your paper, including graphics. Type 3 bitmapped fonts are designed for fixed resolution printers. Most print at 300 dpi even if the printer resolution is 1200 dpi or higher. They also often cause high resolution imagesetter devices and our PDF indexing software to crash. Consequently, AAAI will not accept electronic files containing obsolete type 3 fonts. Files containing those fonts (even in graphics) will be rejected. 
+Do not use type 3 fonts for any portion of your paper, including graphics. Type 3 bitmapped fonts are designed for fixed resolution printers. Most print at 300 dpi even if the printer resolution is 1200 dpi or higher. They also often cause high resolution imagesetter devices and our PDF indexing software to crash. Consequently, AAAI will not accept electronic files containing obsolete type 3 fonts. Files containing those fonts (even in graphics) will be rejected.
 
 Fortunately, there are effective workarounds that will prevent your file from embedding type 3 bitmapped fonts. The easiest workaround is to use the required times, helvet, and courier packages with \LaTeX{}2e. (Note that papers formatted in this way will still use Computer Modern for the mathematics. To make the math look good, you'll either have to use Symbol or Lucida, or you will need to install type 1 Computer Modern fonts --- for more on these fonts, see the section ``Obtaining Type 1 Computer Modern.")
 
-If you are unsure if your paper contains type 3 fonts, view the PDF in Acrobat Reader. The Properties/Fonts window will display the font name, font type, and encoding properties of all the fonts in the document. If you are unsure if your graphics contain type 3 fonts (and they are PostScript or encapsulated PostScript documents), create PDF versions of them, and consult the properties window in Acrobat Reader. 
+If you are unsure if your paper contains type 3 fonts, view the PDF in Acrobat Reader. The Properties/Fonts window will display the font name, font type, and encoding properties of all the fonts in the document. If you are unsure if your graphics contain type 3 fonts (and they are PostScript or encapsulated PostScript documents), create PDF versions of them, and consult the properties window in Acrobat Reader.
 
 The default size for your type must be ten-point with twelve-point leading (line spacing). Start all pages (except the first) directly under the top margin. (See the next section for instructions on formatting the title page.) Indent ten points when beginning a new paragraph, unless the paragraph begins directly below a heading or subheading.
 
@@ -411,19 +415,19 @@ The default size for your type must be ten-point with twelve-point leading (line
 \subsubsection{Obtaining Type 1 Computer Modern for \LaTeX{}.}
 
 If you use Computer Modern for the mathematics in your paper (you cannot use it for the text) you may need to download type 1 Computer fonts. They are available without charge from the American Mathematical Society:
-http://www.ams.org/tex/type1-fonts.html. 
+http://www.ams.org/tex/type1-fonts.html.
 
 \subsubsection{Nonroman Fonts}
-If your paper includes symbols in other languages (such as, but not limited to, Arabic, Chinese, Hebrew, Japanese, Thai, Russian and other Cyrillic languages), you must restrict their use to bit-mapped figures. 
+If your paper includes symbols in other languages (such as, but not limited to, Arabic, Chinese, Hebrew, Japanese, Thai, Russian and other Cyrillic languages), you must restrict their use to bit-mapped figures.
 
 \subsection{Title and Authors}
-Your title must appear in mixed case (nouns, pronouns, and verbs are capitalized) near the top of the first page, centered over both columns in sixteen-point bold type (twenty-four point leading). This style is called ``mixed case," which means that means all verbs (including short verbs like be, is, using,and go), nouns, adverbs, adjectives, and pronouns should be capitalized, (including both words in hyphenated terms), while articles, conjunctions, and prepositions are lower case unless they directly follow a colon or long dash. Author's names should appear below the title of the paper, centered in twelve-point type (with fifteen point leading), along with affiliation(s) and complete address(es) (including electronic mail address if available) in nine-point roman type (the twelve point leading). (If the title is long, or you have many authors, you may reduce the specified point sizes by up to two points.) You should begin the two-column format when you come to the abstract. 
+Your title must appear in mixed case (nouns, pronouns, and verbs are capitalized) near the top of the first page, centered over both columns in sixteen-point bold type (twenty-four point leading). This style is called ``mixed case," which means that means all verbs (including short verbs like be, is, using,and go), nouns, adverbs, adjectives, and pronouns should be capitalized, (including both words in hyphenated terms), while articles, conjunctions, and prepositions are lower case unless they directly follow a colon or long dash. Author's names should appear below the title of the paper, centered in twelve-point type (with fifteen point leading), along with affiliation(s) and complete address(es) (including electronic mail address if available) in nine-point roman type (the twelve point leading). (If the title is long, or you have many authors, you may reduce the specified point sizes by up to two points.) You should begin the two-column format when you come to the abstract.
 
 \subsubsection{Formatting Author Information}
 Author information can be set in a number of different styles, depending on the number of authors and the number of affiliations you need to display. In formatting your author information, however, you may not use a table nor may you employ the \textbackslash authorblk.sty package. For several authors from the same institution, please just separate with commas:
 
 \begin{quote}\begin{scriptsize}\begin{verbatim}
-\author{Author 1, ... Author n\\ 
+\author{Author 1, ... Author n\\
 Address line \\ ... \\ Address line}
 \end{verbatim}\end{scriptsize}\end{quote}
 
@@ -431,7 +435,7 @@ Address line \\ ... \\ Address line}
 
 \begin{quote}\begin{scriptsize}\begin{verbatim}
 \author{Author 1} ... \\
-{\bf \Large Author ... Author}\\ 
+{\bf \Large Author ... Author}\\
 Address line \\ ... \\ Address line
 }
 \end{verbatim}\end{scriptsize}\end{quote}
@@ -439,7 +443,7 @@ Address line \\ ... \\ Address line
 \noindent For two (or three) authors from different institutions, use \textbackslash And:
 
 \begin{quote}\begin{scriptsize}\begin{verbatim}
-\author{Author 1\\ Address line \\ ... \\ Address line 
+\author{Author 1\\ Address line \\ ... \\ Address line
 \And ... \And Author n\\
 Address line\\ ... \\ Address line}
 \end{verbatim}\end{scriptsize}\end{quote}
@@ -454,19 +458,19 @@ after the \textbackslash documentclass line where \{\textit{height}\} is 2.5in o
 If your paper has a large number of authors from different institutions, you may use the following alternative method for displaying the author information.
 
 \begin{quote}\begin{scriptsize}\begin{verbatim}
-\author{AuthorOne},\textsuperscript{\rm 1} 
+\author{AuthorOne},\textsuperscript{\rm 1}
 AuthorTwo,\textsuperscript{\rm 2}
 AuthorThree,\textsuperscript{\rm 3}
-\\bf \Large AuthorFour,\textsuperscript{\rm 4} 
+\\bf \Large AuthorFour,\textsuperscript{\rm 4}
 AuthorFive, \textsuperscript{\rm 5}\\
-\textsuperscript{\rm 1}AffiliationOne, 
-\textsuperscript{\rm 2}AffiliationTwo, 
+\textsuperscript{\rm 1}AffiliationOne,
+\textsuperscript{\rm 2}AffiliationTwo,
 \textsuperscript{\rm 3}AffiliationThree\\
-\textsuperscript{\rm 4}AffiliationFour, 
-\textsuperscript{\rm 5}AffiliationFive 
+\textsuperscript{\rm 4}AffiliationFour,
+\textsuperscript{\rm 5}AffiliationFive
 \{email, email\}@affiliation.com,
 email@affiliation.com,
-email@affiliation.com, 
+email@affiliation.com,
 email@affiliation.com
 \end{verbatim}\end{scriptsize}\end{quote}
 
@@ -496,44 +500,44 @@ Follow the example commands in this document for creation of your abstract. The 
 Do not \textbf{ever} print any page numbers on your paper. The use of \textbackslash pagestyle is forbidden.
 
 \subsection{Text }
-The main body of the paper must be formatted in black, ten-point Times Roman with twelve-point leading (line spacing). You may not reduce font size or the linespacing. Commands that alter font size or line spacing (including, but not limited to baselinestretch, baselineshift, linespread, and others) are expressly forbidden. In addition, you may not use color in the text. 
+The main body of the paper must be formatted in black, ten-point Times Roman with twelve-point leading (line spacing). You may not reduce font size or the linespacing. Commands that alter font size or line spacing (including, but not limited to baselinestretch, baselineshift, linespread, and others) are expressly forbidden. In addition, you may not use color in the text.
 
 \subsection{Citations}
 Citations within the text should include the author's last name and year, for example (Newell 1980). Append lower-case letters to the year in cases of ambiguity. Multiple authors should be treated as follows: (Feigenbaum and Engelmore 1988) or (Ford, Hayes, and Glymour 1992). In the case of four or more authors, list only the first author, followed by et al. (Ford et al. 1997).
 
 \subsection{Extracts}
-Long quotations and extracts should be indented ten points from the left and right margins. 
+Long quotations and extracts should be indented ten points from the left and right margins.
 
 \begin{quote}
-This is an example of an extract or quotation. Note the indent on both sides. Quotation marks are not necessary if you offset the text in a block like this, and properly identify and cite the quotation in the text. 
+This is an example of an extract or quotation. Note the indent on both sides. Quotation marks are not necessary if you offset the text in a block like this, and properly identify and cite the quotation in the text.
 
 \end{quote}
 
 \subsection{Footnotes}
-Avoid footnotes as much as possible; they interrupt the reading of the text. When essential, they should be consecutively numbered throughout with superscript Arabic numbers. Footnotes should appear at the bottom of the page, separated from the text by a blank line space and a thin, half-point rule. 
+Avoid footnotes as much as possible; they interrupt the reading of the text. When essential, they should be consecutively numbered throughout with superscript Arabic numbers. Footnotes should appear at the bottom of the page, separated from the text by a blank line space and a thin, half-point rule.
 
 \subsection{Headings and Sections}
-When necessary, headings should be used to separate major sections of your paper. Remember, you are writing a short paper, not a lengthy book! An overabundance of headings will tend to make your paper look more like an outline than a paper. The aaai.sty package will create headings for you. Do not alter their size nor their spacing above or below. 
+When necessary, headings should be used to separate major sections of your paper. Remember, you are writing a short paper, not a lengthy book! An overabundance of headings will tend to make your paper look more like an outline than a paper. The aaai.sty package will create headings for you. Do not alter their size nor their spacing above or below.
 
 \subsubsection{Section Numbers}
 The use of section numbers in AAAI Press papers is optional. To use section numbers in \LaTeX{}, uncomment the setcounter line in your document preamble and change the 0 to a 1 or 2. Section numbers should not be used in short poster papers.
 
 \subsubsection{Section Headings.}
-Sections should be arranged and headed as follows: 
+Sections should be arranged and headed as follows:
 
 \subsubsection{Acknowledgments.}
-The acknowledgments section, if included, appears after the main body of text and is headed ``Acknowledgments." This section includes acknowledgments of help from associates and colleagues, credits to sponsoring agencies, financial support, and permission to publish. Please acknowledge other contributors, grant support, and so forth, in this section. Do not put acknowledgments in a footnote on the first page. If your grant agency requires acknowledgment of the grant on page 1, limit the footnote to the required statement, and put the remaining acknowledgments at the back. Please try to limit acknowledgments to no more than three sentences. 
+The acknowledgments section, if included, appears after the main body of text and is headed ``Acknowledgments." This section includes acknowledgments of help from associates and colleagues, credits to sponsoring agencies, financial support, and permission to publish. Please acknowledge other contributors, grant support, and so forth, in this section. Do not put acknowledgments in a footnote on the first page. If your grant agency requires acknowledgment of the grant on page 1, limit the footnote to the required statement, and put the remaining acknowledgments at the back. Please try to limit acknowledgments to no more than three sentences.
 
 \subsubsection{Appendices.}
-Any appendices follow the acknowledgments, if included, or after the main body of text if no acknowledgments appear. 
+Any appendices follow the acknowledgments, if included, or after the main body of text if no acknowledgments appear.
 
 \subsubsection{References}
 The references section should be labeled ``References" and should appear at the very end of the paper (don't end the paper with references, and then put a figure by itself on the last page). A sample list of references is given later on in these instructions. Please use a consistent format for references. Poorly prepared or sloppy references reflect badly on the quality of your paper and your research. Please prepare complete and accurate citations.
 
 \subsection{Illustrations and Figures}
-Figures, drawings, tables, and photographs should be placed throughout the paper near the place where they are first discussed. Do not group them together at the end of the paper. If placed at the top or bottom of the paper, illustrations may run across both columns. Figures must not invade the top, bottom, or side margin areas. Figures must be inserted using the \textbackslash usepackage\{graphicx\}. Number figures sequentially, for example, figure 1, and so on. 
+Figures, drawings, tables, and photographs should be placed throughout the paper near the place where they are first discussed. Do not group them together at the end of the paper. If placed at the top or bottom of the paper, illustrations may run across both columns. Figures must not invade the top, bottom, or side margin areas. Figures must be inserted using the \textbackslash usepackage\{graphicx\}. Number figures sequentially, for example, figure 1, and so on.
 
-The illustration number and caption should appear under the illustration. Labels, and other text with the actual illustration must be at least nine-point type. 
+The illustration number and caption should appear under the illustration. Labels, and other text with the actual illustration must be at least nine-point type.
 
 If your paper includes illustrations that are not compatible with PDF\TeX{} (such as .eps or .ps documents), you will need to convert them. The epstopdf package will usually work for eps files. You will need to convert your ps files to PDF however.
 
@@ -543,7 +547,7 @@ If your paper includes illustrations that are not compatible with PDF\TeX{} (suc
 You may not use low-resolution (such as 72 dpi) screen-dumps and GIF files---these files contain so few pixels that they are always blurry, and illegible when printed. If they are color, they will become an indecipherable mess when converted to black and white. This is always the case with gif files, which should never be used. The resolution of screen dumps can be increased by reducing the print size of the original file while retaining the same number of pixels. You can also enlarge files by manipulating them in software such as PhotoShop. Your figures should be 300 dpi when incorporated into your document.
 
 \subsubsection{\LaTeX{} Overflow.}
-\LaTeX{} users please beware: \LaTeX{} will sometimes put portions of the figure or table or an equation in the margin. If this happens, you need to scale the figure or table down, or reformat the equation.{ \bf Check your log file!} You must fix any overflow into the margin (that means no overfull boxes in \LaTeX{}). \textbf{Nothing is permitted to intrude into the margin or gutter.} 
+\LaTeX{} users please beware: \LaTeX{} will sometimes put portions of the figure or table or an equation in the margin. If this happens, you need to scale the figure or table down, or reformat the equation.{ \bf Check your log file!} You must fix any overflow into the margin (that means no overfull boxes in \LaTeX{}). \textbf{Nothing is permitted to intrude into the margin or gutter.}
 
 The most efficient and trouble-free way to fix overfull boxes in graphics is with the following command:
 
@@ -554,7 +558,7 @@ The most efficient and trouble-free way to fix overfull boxes in graphics is wit
 \end{small}\end{quote}
 
 \subsubsection{Using Color.}
-Use of color is restricted to figures only. It must be WACG 2.0 compliant. (That is, the contrast ratio must be greater than 4.5:1 no matter the font size.) It must be CMYK, NOT RGB. It may never be used for any portion of the text of your paper. The archival version of your paper will be printed in black and white and grayscale.The web version must be readable by persons with disabilities. Consequently, because conversion to grayscale can cause undesirable effects (red changes to black, yellow can disappear, and so forth), we strongly suggest you avoid placing color figures in your document. If you do include color figures, you must (1) use the CMYK (not RGB) colorspace and (2) be mindful of readers who may happen to have trouble distinguishing colors. Your paper must be decipherable without using color for distinction. 
+Use of color is restricted to figures only. It must be WACG 2.0 compliant. (That is, the contrast ratio must be greater than 4.5:1 no matter the font size.) It must be CMYK, NOT RGB. It may never be used for any portion of the text of your paper. The archival version of your paper will be printed in black and white and grayscale.The web version must be readable by persons with disabilities. Consequently, because conversion to grayscale can cause undesirable effects (red changes to black, yellow can disappear, and so forth), we strongly suggest you avoid placing color figures in your document. If you do include color figures, you must (1) use the CMYK (not RGB) colorspace and (2) be mindful of readers who may happen to have trouble distinguishing colors. Your paper must be decipherable without using color for distinction.
 
 \subsubsection{Drawings.}
 We suggest you use computer drawing software (such as Adobe Illustrator or, (if unavoidable), the drawing tools in Microsoft Word) to create your illustrations. Do not use Microsoft Publisher. These illustrations will look best if all line widths are uniform (half- to two-point in size), and you do not create labels over shaded areas. Shading should be 133 lines per inch if possible. Use Times Roman or Helvetica for all figure call-outs. \textbf{Do not use hairline width lines} --- be sure that the stroke width of all lines is at least .5 pt. Zero point lines will print on a laser printer, but will completely disappear on the high-resolution devices used by our printers.
@@ -563,12 +567,12 @@ We suggest you use computer drawing software (such as Adobe Illustrator or, (if 
 Photographs and other images should be in grayscale (color photographs will not reproduce well; for example, red tones will reproduce as black, yellow may turn to white, and so forth) and set to a minimum of 300 dpi. Do not prescreen images.
 
 \subsubsection{Resizing Graphics.}
-Resize your graphics \textbf{before} you include them with LaTeX. You may \textbf{not} use trim or clip options as part of your \textbackslash includegraphics command. Resize the media box of your PDF using a graphics program instead. 
+Resize your graphics \textbf{before} you include them with LaTeX. You may \textbf{not} use trim or clip options as part of your \textbackslash includegraphics command. Resize the media box of your PDF using a graphics program instead.
 
 \subsubsection{Fonts in Your Illustrations}
 You must embed all fonts in your graphics before including them in your LaTeX document.
 
-\subsection{References} 
+\subsection{References}
 The AAAI style includes a set of definitions for use in formatting references with BibTeX. These definitions make the bibliography style fairly close to the one specified below. To use these definitions, you also need the BibTeX style file ``aaai.bst," available in the AAAI Author Kit on the AAAI web site. Then, at the end of your paper but before \textbackslash end{document}, you need to put the following lines:
 
 \begin{quote}
@@ -620,10 +624,10 @@ Hasling, D. W.; Clancey, W. J.; and Rennels, G. R. 1983. Strategic Explanations 
 Clancey, W. J. 1983. Communication, Simulation, and Intelligent Agents: Implications of Personal Intelligent Machines for Medical Education. In \textit{Proceedings of the Eighth International Joint Conference on Artificial Intelligence,} 556--560. Menlo Park, Calif.: International Joint Conferences on Artificial Intelligence, Inc.
 
 \smallskip \noindent \textit{Proceedings Paper Published by a Press or Publisher}\\
-Clancey, W. J. 1984. Classification Problem Solving. In \textit{Proceedings of the Fourth National Conference on Artificial Intelligence,} 49--54. Menlo Park, Calif.: AAAI Press. 
+Clancey, W. J. 1984. Classification Problem Solving. In \textit{Proceedings of the Fourth National Conference on Artificial Intelligence,} 49--54. Menlo Park, Calif.: AAAI Press.
 
 \smallskip \noindent \textit{University Technical Report}\\
-Rice, J. 1986. Poligon: A System for Parallel Problem Solving, Technical Report, KSL-86-19, Dept. of Computer Science, Stanford Univ. 
+Rice, J. 1986. Poligon: A System for Parallel Problem Solving, Technical Report, KSL-86-19, Dept. of Computer Science, Stanford Univ.
 
 \smallskip \noindent \textit{Dissertation or Thesis}\\
 Clancey, W. J. 1979. Transfer of Rule-Based Expertise through a Tutorial Dialogue. Ph.D. diss., Dept. of Computer Science, Stanford Univ., Stanford, Calif.
@@ -636,7 +640,7 @@ For the most up to date version of the AAAI reference style, please consult the 
 
 
 \section{Proofreading Your PDF}
-Please check all the pages of your PDF file. The most commonly forgotten element is the acknowledgements --- especially the correct grant number. Authors also commonly forget to add the metadata to the source, use the wrong reference style file, or don't follow the capitalization rules or comma placement for their author-title information properly. A final common problem is text (expecially equations) that runs into the margin. You will need to fix these common errors before submitting your file. 
+Please check all the pages of your PDF file. The most commonly forgotten element is the acknowledgements --- especially the correct grant number. Authors also commonly forget to add the metadata to the source, use the wrong reference style file, or don't follow the capitalization rules or comma placement for their author-title information properly. A final common problem is text (expecially equations) that runs into the margin. You will need to fix these common errors before submitting your file.
 
 \section{Improperly Formatted Files }
 In the past, AAAI has corrected improperly formatted files submitted by the authors. Unfortunately, this has become an increasingly burdensome expense that we can no longer absorb (we are charged double for papers that require reformatting). Consequently, if your file is improperly formatted, it will probably be returned to you by the outside Production agency. If that happens, you will be required to fix your file and pay a resubmission fee.
@@ -650,14 +654,14 @@ We require that you name your \LaTeX{} source file with the last name (family na
 \section{Submitting Your Electronic Files to AAAI}
 Instructions on paper submittal will be provided to you in your acceptance letter.
 
-\section{Inquiries} 
+\section{Inquiries}
 If you have any questions about the preparation or submission of your paper as instructed in this document, please contact AAAI Press at the address given below. If you have technical questions about implementation of the aaai style file, please contact an expert at your site. We do not provide technical support for \LaTeX{} or any other software package. To avoid problems, please keep your paper simple, and do not incorporate complicated macros and style files.
 
 \begin{quote}
 \noindent AAAI Press\\
 2275 East Bayshore Road, Suite 160\\
-Palo Alto, California 94303\\ 
-\textit{Telephone:} (650) 328-3123\\ 
+Palo Alto, California 94303\\
+\textit{Telephone:} (650) 328-3123\\
 \textit{E-mail:} See the submission instructions for your particular conference or event.
 \end{quote}
 
@@ -665,7 +669,7 @@ Palo Alto, California 94303\\
 \LaTeX{} is a difficult program to master. If you've used that software, and this document didn't help or some items were not explained clearly, we recommend you read Michael Shell's excellent document (testflow doc.txt V1.0a 2002/08/13) about obtaining correct PS/PDF output on \LaTeX{} systems. (It was written for another purpose, but it has general application as well). It is available at www.ctan.org in the tex-archive.
 
 \section{ Acknowledgments}
-AAAI is especially grateful to Peter Patel Schneider for his work in implementing the aaai.sty file, liberally using the ideas of other style hackers, including Barbara Beeton. We also acknowledge with thanks the work of George Ferguson for his guide to using the style and BibTeX files --- which has been incorporated into this document --- and Hans Guesgen, who provided several timely modifications, as well as the many others who have, from time to time, sent in suggestions on improvements to the AAAI style. 
+AAAI is especially grateful to Peter Patel Schneider for his work in implementing the aaai.sty file, liberally using the ideas of other style hackers, including Barbara Beeton. We also acknowledge with thanks the work of George Ferguson for his guide to using the style and BibTeX files --- which has been incorporated into this document --- and Hans Guesgen, who provided several timely modifications, as well as the many others who have, from time to time, sent in suggestions on improvements to the AAAI style.
 
 The preparation of the \LaTeX{} and Bib\TeX{} files that implement these instructions was supported by Schlumberger Palo Alto Research, AT\&T Bell Laboratories, Morgan Kaufmann Publishers, The Live Oak Press, LLC, and AAAI Press. Bibliography style changes were added by Sunil Issar. \verb+\+pubnote was added by J. Scott Penberthy. George Ferguson added support for printing the AAAI copyright slug. Additional changes to aaai.sty and aaai.bst have been made by the AAAI staff.
 

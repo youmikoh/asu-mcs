@@ -42,7 +42,6 @@ $$
 
 \gdef\CHOOSE#1#2{(#1\ \mathbf{C}\ #2)}
 
-\CHOOSE{3}{5}
 $$
 
 ## Choice Rules & Constraints
