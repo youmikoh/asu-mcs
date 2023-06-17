@@ -44,7 +44,7 @@ $$
 
 ## Intro to Reasoning about Actions
 
-> OBJECTIVE: xplain the idea of reasoning about actions
+> OBJECTIVE: explain the idea of reasoning about actions
 
 ### What is Reasoning about Actions?
 
@@ -63,12 +63,11 @@ How can the monekey grasp the bananas?
 
 ### Action Description Languages
 
-Formal models of parts of natural language that are used for describing the effects of actions.
-Define “transition systems” — directed graphs whose vertices correspond to states and whose edges are labeled by actions.
+Formal models of parts of natural language that are used for describing the effects of actions. Define “transition systems” as directed graphs whose vertices correspond to states and whose edges are labeled by actions.
 
 ### Transition System
 
-A transition system is a directed graph:
+A TRANSITION SYSTEM is a directed graph:
 - whose vertices correspond to the states of the world
 - whose edges are labelled by actions
 
@@ -84,15 +83,14 @@ stateDiagram
   T --> T : a=t
 ```
 
-### Fluents and Commoonsense Law of Inertia
+### Fluents and Commonsense Law of Inertia
 
 - FLUENT: anything that depends on the state of the world
   - whether the monkey has the bananas
   - whether the monkey is on the box
   - locations of the monkey, the bananas and the box (MULTI-VALUED FLUENTS)
 - Commonsense law of INERTIA: by default, the values of fluents remain unchanged after executing actions
-- The Frame Problem: how to formalize the commonsense law of inertia, that is, how to represent inertial fluents
-  - It was solved in mid 1990’s
+- The Frame Problem: how to formalize the commonsense law of inertia, that is, how to represent inertial fluents - solved in mid 1990’s
 
 ### Yale Shooting Problem (1987)
 
@@ -140,17 +138,8 @@ A transition system is a directed graph
 - whose vertices correspond to the states of the world
 - whose edges are labelled by actions
 
-```mermaid
-stateDiagram
-  direction LR
-  state "p=f" as F
-  state "p=t" as T
 
-  F --> F : a=f
-  F --> T : a=t
-  T --> T : a=f
-  T --> T : a=t
-```
+![img](/cse579/5_reasoning_about_actions/transition_system.png)
 
 ### Representing Simple Transition System in ASP
 
@@ -287,13 +276,13 @@ p(t,T+1) :- a(T), T=0..m-1.
 
 Replace the double negation constraint rule
 ```clingo
-:- not 1{p(B,T):boolean(B)}1, T=1..m.
+:- not 1{p(B,T):boolean(B)}1, T=1..m. % -- (1)
 ```
 with
 ```clingo
-1{p(B,T):boolean(B)}1, T=1..m.
+1{p(B,T):boolean(B)}1, T=1..m. % -- (2)
 ```
-How will the stable model change?
+How will `(2)` stable model change? For each time T=1..m, we randomly choose a state from `{p=t, p=f}`.
 
 
 ## Monkey and Bananas
@@ -306,17 +295,18 @@ In Monkey and Bananas problem, a state can be described by specifying
 - whether or not the monkey has the bananas
 
 A state can be described by atoms:
-- $Loc(x,y) (x \in \set{ Monkey, Bananas, Box},~ y \in \set{L1, L2, L3})$
+- $Loc(x,y)$ s.t. $(x \in \set{ Monkey, Bananas, Box},~ y \in \set{L1, L2, L3})$
 - $HasBananas$
 - $OnBox$
 
-The interpretatoins that satisfy the below represents the possible states of the system:
+The interpretations that satisfy the below represents the possible states of the system:
 - $\exists y Loc(x,y)$
 - $\NOT \exists yy_1(Loc(x,y) \AND Loc(x,y_1) \AND y \neq y_1)$
 - $HasBananas \AND Loc(Monkey,l) \THEN Loc(Bananas, l)$
 - $OnBox \AND Loc(Monkey, l) \THEN Loc(Box,l)$
 
 ### Representing Action Domain in ASP
+###### <-------------IMPORTANT--------------->
 
 - sort and object declaration - possible types and objects of the types
 - state constraints
@@ -603,10 +593,157 @@ on(B,L,T+1) :- move(B,L,T).
     `loc(m)=table, loc(l)=m, loc(a)=l, loc(b)=a, loc(c)=b, loc(o)=table, loc(n)=o, loc(d)=n, loc(e)=d, loc(j)=e, loc(k)=j, loc(f)=table, loc(g)=f, loc(h)=g, loc(i)=h`
   - in maxstep:
 
-    `loc(e)=j, loc(a)= e, loc(n)=a, loc(i)=d, loc(h)=i, loc(m)=h, loc(o)= m, loc(k)=g, loc(c)=k, loc(b)=c, loc(l)=b.`
+    `loc(e)=j, loc(a)= e, loc(n)=a, loc(i)=d, loc(h)=i, loc(m)=h, loc(o)=m, loc(k)=g, loc(c)=k, loc(b)=c, loc(l)=b.`
 
 ### Problem 4
 
 - a minimal length plan is not necessarily optimal
 - modify the program done for Problem 3 to find a plan that has the least number of actions
 - what is that number when maxstep m is 8, 9, and 10?
+
+## Expressive Possibilities
+
+> OBJECTIVES: use ASP to express more complex transition systems containing nondeterministic actions, concurrent actions and non-inertial fluents
+
+### Non-deterministic Actions: Example
+
+#### Setup
+When Jack goes to work, he either walks there or drives his car. We view walking and driving as two ways of executing the same action. The effect of that action on Jack’s location is deterministic, but its effect on the location of his car is not.
+
+#### Details
+
+In the transition system represented by this action description we can find two different edges that start at the same state and are labeled by the same event. For instance there are two edges that start at `{Loc(Jack)=Home,Loc(Car)=Home}` and have the label `{Go(Home)=f, Go(Work)=t}`.
+- one leads to `{Loc(Jack)=Work, Loc(Car)=Home}` walking
+- other leads to `{Loc(Jack)=Work, Loc(Car)=Work}`, i.e. driving
+
+#### Computing
+
+```clingo
+% going.lp
+
+boolean(t;f).
+
+% sorts and object declarations
+object(jack;car).
+location(home;work).
+
+% effect and precondition of go
+loc(jack,L,T+1) :- go(L,T).
+{loc(car,L,T+1)} :- go(L,T), loc(car,L1,T), loc(jack,L1,T), T=0..m-1. % use choice rule to describe non-deterministic effect
+:- go(L,T), loc(jack,L,T).
+
+% domain independent axioms
+% fluents are exogenous initially
+1{loc(O,LL,0):location(LL)}1 :- object(O).
+
+% uniqueness and existence of fluent values
+:- not 1{loc(O,LL,T)}1, object(O), T=1..m.
+
+% actions are exogenous
+{go(L,T)} :- location(L), T=0..m-1.
+
+% fluents are inertial
+{loc(O,L,T+1)} :- loc(O,L,T), T=0..m-1.
+```
+### Interaction between Concurrent Actions: Example
+
+#### Setup
+
+In a standard example of interacting actions, two agents lift the opposite ends of a table upon which various objects have been placed [Pednault, 1987, Section 3]. If one end of the table has been raised, the objects on the table will fall off. But if both ends are lifted simultaneously, the objects on the table will remain fixed.
+
+```clingo
+% lifting.lp
+
+% sort and object declarations
+boolean(t;f).
+end(leftEnd;rightEnd).
+height(low;high).
+
+% state constraints
+onTable(f,T) :- level(leftEnd,H,T), level(rightEnd,H1,T), H!=H1.
+
+% effect and precondition of lift
+level(E,high,T+1) :- lift(E,T).
+:- lift(E,T), level(E,high,T).
+
+% domain independent axioms
+% fluents are exogenous initially
+1{level(E,HH,0): height(HH)}1 :- end(E).
+1{onTable(BB,0): boolean(BB)}1.
+
+% uniqueness and existence of fluent values
+:- not 1{level(E,HH,T)}1, end(E), T=1..m.
+:- not 1{onTable(BB,T)}1, T=1..m.
+
+% actions are exogenous
+{lift(E,T)} :- end(E), T=0..m-1.
+
+% fluents are inertial
+{level(E,H,T+1)} :- level(E,H,T), T=0..m-1.
+{onTable(B,T+1)} :- onTable(B,T), T=0..m-1.
+```
+
+### Non-Inertial Fluents: Example
+
+#### Setup
+
+Consider a pendulum that moves from its leftmost position to the rightmost and back, with each swing taking one unit of time.
+
+#### Details
+
+```clingo
+% pendulum.lp
+
+% sorts and object declaration
+boolean(t;f).
+
+% effects of hold
+right(T+1) :- hold(T), right(T).
+left(T+1) :- hold(T), left(T).
+
+% by default, pendulum changes the position
+{left(T+1)} :- right(T), T=0..m-1.
+{right(T+1)} :- left(T), T=0..m-1.
+
+% fluents are exogenous initially
+1{right(0);left(0)}1.
+
+% uniqueness and existence of values for fluents
+:- not 1{right(T);left(T)}1, T=1..m.
+
+% exogenous action
+{hold(T)} :- T=0..m-1.
+```
+
+##### QUIZ QUESTION 1
+
+```clingo
+boolean(t;f).
+p(t,T+1) :- a(T), T=0..m-1.
+1{p(B,0):boolean(B)}1.
+1{p(B,T):boolean(B)}1 :- T=1..m.  % <-------- new
+{a(T)} :- T=0..m-1.
+{p(B,T+1)} :- p(B,T), T=0..m-1.
+```
+Let's first understand the meaning of each rule in the ASP program.
+
+| rule | meaning |
+| :--- | :--- |
+| boolean(t;f). | There are 2 Boolean values t and f. |
+| p(t,T+1) :- a(T), T=0..m-1. |  For any time stamps from 0 to m-1, if action a is executed, then the state at the next time stamp is p=t. |
+| 1{p(B,0):boolean(B)}1. | At time 0, we randomly choose a state from {p=t, p=f}. |
+| 1{p(B,T):boolean(B)}1 :- T=1..m. | At time 1 to m, we randomly choose a state from {p=t, p=f}. |
+| {a(T)} :- T=0..m-1. | At time 0 to m-1, we randomly choose to execute action a or not. |
+| {p(B,T+1)} :- p(B,T), T=0..m-1. | At time 0 to m-1, if p=B is true, p=B could be true at the next time stamp. |
+
+- Apparently, there are 2 states: `p=t` and `p=f`.
+- We then need to understand what will happen at each state when `a` is and is not executed.
+  - Case 1: p=t and a=t. The next state must be p=t due to the 2nd rule "p(t,T+1) :- a(T), T=0..m-1."
+  - Case 2: p=t and a=f. The next state can be either p=t or p=f due to the 4th rule "1{p(B,T):boolean(B)}1 :- T=1..m."
+  - Case 3: p=f and a=t. The next state must be p=t due to the 2nd rule "p(t,T+1) :- a(T), T=0..m-1."
+  - Case 4: p=f and a=f. The next state can be either p=t or p=f due to the 4th rule "1{p(B,T):boolean(B)}1 :- T=1..m."
+
+
+##### QUIZ QUESTION 2
+- In clingo, if we want to represent the initial state, we can use either facts in the form of "ATOM." or constraints in the form of ":- not ATOM."
+- If we want to represent the goal state, we MUST use constraints in the form of ":- not ATOM." where the ATOM must represent something in the last time stamp m. This option is wrong since it use facts to define the goal state. The reason why we cannot do so is because, for example, the atom "on(a, b, m)" is true due to this rule even if no action is made at any time stamp.

@@ -6,7 +6,7 @@ authors = ["Youmi Koh <youmi.koh@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.11"
+python = "^3.11"
 opencv-python = "^4.7.0.72"
 jupyter = "^1.0.0"
 notebook = "^6.5.4"

@@ -1020,7 +1020,7 @@ $$
 
 ### Summation
 
-- if `#sum` is applied to an expression containing several terms to the left of the colon, then the value of `#sum` can be described in terms of "WEIGHTS"
+- if `#sum` is applied to an expression containing several terms to the left of the colon, then the value of `#` can be described in terms of "WEIGHTS"
 - the weight of a tuple consisting of integers and symbolic constantsis the first member of the tuple.
 - what `#sum` calculates in application to a set of tuples is the sum of the weights of all its elements that have integer weights.
 

@@ -7,3 +7,5 @@ block(1..6).
 
 % goal
 :- not on(3,2,m; 2,1,m; 1,table,m; 6,5,m; 5,4,m; 4,table,m).
+
+

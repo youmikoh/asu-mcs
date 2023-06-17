@@ -1,3 +1,5 @@
+% blocks.lp
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % sort and object declaration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,7 +16,6 @@ location(table).
 
 % two blocks can't be on the same block at the same time
 :- 2{on(BB,B,T)}, block(B), T = 0..m.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % effect and preconditions of action
@@ -47,3 +48,7 @@ on(B,L,T+1) :- move(B,L,T).
 
 % commonsense law of inertia
 {on(B,L,T+1)} :- on(B,L,T), T = 0..m-1.
+
+
+#show move/3.
+
