@@ -1,6 +1,8 @@
+<script src="katex-config.js"></script>
+
 # [Week 3] Theory of Answer Set Programming
 
-$$
+<!-- $$
 \gdef\T{\top}
 \gdef\F{\bot}
 \gdef\NOT{\lnot}
@@ -59,7 +61,7 @@ $$
 \Rbox{bred~\txt{txt}~\AND} ~\Bbox{bblue~\txt{txt}~\OR} ~\Gbox{bgreen~\txt{txt}~\IF} ~\Pbox{bpink~\txt{txt}~\THEN} ~\Vbox{bviolet~\txt{txt}~\EQ}
 \\
 
-$$
+$$ -->
 
 ## Introduction to Answer Set Programming
 
