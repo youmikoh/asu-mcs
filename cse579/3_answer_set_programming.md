@@ -2,7 +2,7 @@
 
 # [Week 3] Theory of Answer Set Programming
 
-<!-- $$
+$$
 \gdef\T{\top}
 \gdef\F{\bot}
 \gdef\NOT{\lnot}
@@ -61,7 +61,7 @@
 \Rbox{bred~\txt{txt}~\AND} ~\Bbox{bblue~\txt{txt}~\OR} ~\Gbox{bgreen~\txt{txt}~\IF} ~\Pbox{bpink~\txt{txt}~\THEN} ~\Vbox{bviolet~\txt{txt}~\EQ}
 \\
 
-$$ -->
+$$
 
 ## Introduction to Answer Set Programming
 
@@ -297,7 +297,7 @@ Informally, program $\Pi$ can be viewed as a specification for stable models - s
 - For positive programs, stable models are defined as minimal models
 - Q: Does every positive program have a unique minimal mode? No
   - $p \OR q$ positive program, but has 3 minimal models: $\set{p}, ~\set{q}$
-- A stable model of a definite program $\Pi$ is <u>THE minimal model</u>  of $\Pi$
+- A stable model of a definite program $\Pi$ is <u>THE minimal model</u> of $\Pi$
 - A stable model of a positive program $\Pi$ is <u>A minimal model</u> of $\Pi$
 
 ## Definite/Positive Programs in the Language of `clingo`

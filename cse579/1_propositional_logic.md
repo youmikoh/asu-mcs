@@ -494,7 +494,7 @@ $$
 ### How are Entailment and Tautology related?
 
 - $\{F_1, ..., F_n\} \vDash G$ iff $(F_1 \land ... \land F_n) \rightarrow G$ is a tautology
-- Example: $\{p \lor \lnot q, \lnot p \lor q\} \vDash q$ iff  $(p \lor \lnot q) \land (\lnot p \lor q) \rightarrow q$ is unsatisfiable
+- Example: $\{p \lor \lnot q, \lnot p \lor q\} \vDash q$ iff  $(p \lor \lnot q) \land (\lnot p \lor q) \rightarrow q$ is a tautology
 - $\emptyset \vDash G$ iff $G$ is a tautology
 
 ### How are Entailment and Satisfiability related?
@@ -813,12 +813,11 @@ $$
 
 - pay attention to prop formula, don't mix $\lor, \land$
 - $\{F \rightarrow G, G \rightarrow H\} \nvDash H \rightarrow F$
-- $\{F \rightarrow G, G \rightarrow H\} \nvDash H \rightarrow F$
 - $F \land (F \lor G) \land (\lnot F \lor \lnot G) \land (G \lor H) \land (\lnot G \lor \lnot H)$ IS satisfiable
 - $\{\bot\} \vDash F$, not necessary for $F$ to be a tautology
 - $F \lor (G\leftrightarrow H) \Leftrightarrow (F \lor G)\leftrightarrow (F\lor H)$
 - For tautology $F\lor G$, not necessary for neither $F$ or $G$ to be tautology
-- $\{p \lor q\}$ does not nevessarily entail $p$ or $q$
+- $\{p \lor q\}$ does not necessarily entail $p$ or $q$
 - $\emptyset \nvDash p$
 
 

@@ -1,0 +1,9 @@
+% File: bird.lpmln
+bird(X) :- residentbird(X).
+bird(X) :- migratorybird(X).
+:- residentbird(X), migratorybird(X).
+2 residentbird(jo).
+1 migratorybird(jo).
+
+% lpmln-infer bird.lpmln
+% lpmln-infer bird.lpmln -all
