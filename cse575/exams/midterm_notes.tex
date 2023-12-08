@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.25in]{geometry}
+\usepackage{setspace}
+\setstretch{0.9}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage[most]{tcolorbox}
+
+\usepackage{cse575}
+\raggedright
+\pagestyle{empty}
+\pagenumbering{gobble}
+
+\begin{document} \noindent \scriptsize \setlength{\fboxsep}{0pt}
+\purpose{midterm exam} \quad
+\topic{ml-intro} \quad
+\NEW    [supervised learning] data has corresponding labels (classification, regression)
+\NEW    [unsupervised learning] data has no corresponding labels (clustering, density estimation reduction)
+\NEW    [data label types] numerical, ordinal, categorical, graphical (vectors, classes, nodes, edges)
+\stopic{calculus}
+\NEW    partial derivative of $f(x,y,..)$ wrt $x,y,.. \THN \{\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y},..\}$
+\NEW    scalar-value $f(\la x,y,..\ra^\trans) = ax+by+cz$
+\NEW    vector-value $\vec{f}(x)$ $=\la 1, ax,bx^2 \ra^\trans$
+\NEW    gradient in $d$-dim euclidean space $\mathbb{R}^d \THN \nabla f = \la\frac{\partial f}{\partial x_1},..,\frac{\partial f}{\partial x_d} \ra^\trans$
+\stopic{lin-algebra}
+\NEW    $\underset{n\by n}{\MX{A}}$ symmetric $\Leftrightarrow \MX{A}^\trans = \MX{A}$
+\NEW    euclidean norm (length) of vector $||x||= \sqrt{x^\trans x} = \sqrt{\sum_i x_i^2}$
+\NEW    normalized (unit direction) vector $x_{\text{norm}} = \frac{x}{\|x\|}$ where $\|x_{\text{norm}}\| = 1$ (normalize features of different domains to same scale)
+\NEW    matrix $\underset{n\by d}{\MX{A}} = \left[\begin{smallmatrix}\leftarrow d \rightarrow \\..\\ \longleftrightarrow\end{smallmatrix}\right] \begin{smallmatrix}\uparrow \\n\\ \downarrow \end{smallmatrix} \THN$ transposed $\MX{A}^\trans = \left[\begin{smallmatrix}\leftarrow n \rightarrow \\..\\ \longleftrightarrow\end{smallmatrix}\right] \begin{smallmatrix}\uparrow \\d\\ \downarrow \end{smallmatrix}$
+\NEW    multiply matrix$\By$vector $\MX{A}x = y \THN \begin{smallmatrix}\uparrow \\n\\ \downarrow \end{smallmatrix} \left[\begin{smallmatrix} a_{11} .. a_{1d}\\ \longleftarrow d \longrightarrow \\a_{n1} .. a_{nd} \end{smallmatrix}\right] \left[\begin{smallmatrix} x_1 \\..\\ x_d \end{smallmatrix}\right] = \left[\begin{smallmatrix} a_{11} \cdot x_1 + .. + a_{1d} \cdot x_d \\..\\ a_{n1} \cdot x_1 + .. + a_{nd} \cdot x_d \end{smallmatrix}\right]_{d \by 1}$
+\NEW    multiply matrices  $\underset{n\by d}{\MX{A}}\underset{d\by n}{\MX{B}} = \begin{smallmatrix}\uparrow \\n\\ \downarrow \end{smallmatrix} \left[\begin{smallmatrix} ..&\\ \leftarrow d \rightarrow &(i)\\..&\end{smallmatrix}\right] \left[\begin{smallmatrix} \\..&\updownarrow &..\\ &(j)& &\end{smallmatrix}\right] \begin{smallmatrix}\uparrow \\ d \\ \downarrow \end{smallmatrix} = \left[\begin{smallmatrix} ..&..&..\\..& (i\cdot j) &..\\..&..&..\end{smallmatrix}\right]_{n\by d}$
+\NEW    outer prod of vectors $xy^\trans = \la x_1,..,x_d \ra \la y_1,..,y_d \ra^\trans = \left[\begin{smallmatrix} x_1y_1 &..& x_1y_d \\..&..&..\\ x_dy_1 &..& x_dy_d \end{smallmatrix}\right]_{d\by d}$
+\NEW    inner prod of vectors $x^\trans y = \la x_1,..,x_d \ra \la y_1,..,y_d \ra^\trans = \sum_{i,j} x_iy_j$
+\NEW    determinant of matrix  $\underset{n\by n}{\MX{A}} \THN$ $\RM{det}(\MX{A}) = |\MX{A}| = \sum_j^n (-1)^{i+j} a_{ij} \cdot \RM{minor}_ij$ where submatrix $\RM{minor}_ij$ of $\MX{A}$ from removing row $i$, col $j$
+\NEW    trace of matrix $\MX{A}_{n\by n} \THN \trace(\MX{A}) = \sum_i^n a_{ij}$ where $\trace(\MX{A}) = \trace(\MX{A}^\trans)$, $\trace(\MX{A}+\MX{B}) = \trace(\MX{A}) + \trace(\MX{B})$, $\trace(c\MX{A}) = c \trace(\MX{A})$
+\NEW    matrix inverse $\MX{A}\MX{A}^\inv = \MX{I}$ compute by mounting $[\MX{A} | \MX{I}]$ then gauss-jordan elim (pivots) until $\MX{A} \rightarrow \MX{I}, \MX{I} \rightarrow \MX{A}^\inv$
+\NEW    OR get cofactor matrix $[ c_{ij} ] = (-1)^{i+j} \RM{det}(\RM{minor}_ij)$ then $\MX{A}^\inv = \frac{1}{\RM{det}(\MX{A})} [c_{ij}]^\trans$
+\NEW    eigenvectors $x_i$, eigvenvalues $\lambda_i$ of matrix $\underset{n\by d}{\MX{A}} \THN$ $\MX{A}x = \lambda x \Leftrightarrow (\MX{A}-\lambda \MX{I})x = 0$ where $\trace(\MX{A}) = \sum_i^n \lambda_i$ and $|\MX{A}| = \prod_i^n \lambda_i$
+\NEW    derivative of matrix $\MX{A}$ with entries $a_{ij}$ dependent on scalar param $\theta \THN$ $\frac{\partial \MX{A}}{\partial \theta} = \left[\frac{\partial a_{ij}}{\partial \theta}\right], \forall ij$
+\NEW    derivative (gradient) of scalar-value $f(x)$ wrt $x = \la x_1, .. , x_d\ra^\trans \THN \nabla_x f(x) = $ $\la \frac{\partial f}{\partial x_1} ,..,\frac{\partial f}{\partial x_d} \ra^\trans$
+\NEW    derivative of $n$-dim vector-value $f(x)$ wrt $x = \la x_1, .. , x_d\ra^\trans$ $\THN$ jacobian $\BF{J}_x f(x) = \frac{\partial f}{\partial x} = \left[\frac{\partial f_i}{\partial x_j}\right]_{n\by d}$ for $\scriptstyle{1 \leq i \leq n,\,1 \leq j \leq d}$ where $\frac{\partial}{\partial x}(\MX{A}x)=\MX{A}^\trans$, $\frac{\partial}{\partial x}(x^\trans \MX{A}x) = (\MX{A} +\MX{A}^\trans) \THN \frac{\partial}{\partial x}(x^\trans \MX{A}x) = 2\MX{A}x, \forall\underset{n\by n}{\MX{A}}$ \topic{probability}
+\NEW prob space $(\Omega, \mathfrak{B}, P)$ where $\Omega$ sample space (set of all outcomes), $\mathfrak{B}$ sigma algebra or boreal field (subsets of $\Omega$ st some constraints), $P$ probability measure on $\mathfrak{B}$ st $P(\Omega) = 1$, $P(\RM{B}) \geq 0$ for $\RM{B}\in\mathfrak{B}$, $P(\bigcup_i \RM{B}_i) = \sum_i P(\RM{B}_i)$ for pairwise disjoint $\RM{B}_i$ where $\RM{B}_i\RM{B}_j = \emptyset$
+\NEW $\RM{A},\RM{B}\in\mathfrak{B}$ st $P(\RM{B}) > 0$ $\THN$ $P(\RM{A}|\RM{B}) = \frac{P(\RM{A}\RM{B})}{P(\RM{B})}$ where $P(\RM{A}|\RM{B})$ conditional prob of $\RM{A}$ given $\RM{B}$
+\NEW $\{\RM{B}_i\}$ pairwise disjoint st $\cup_i\RM{B}_i = \Omega$ and $\RM{B}_i > 0 \THN P(\RM{A}) = \sum_i P(\RM{A}|\RM{B}_i)P(\RM{B}_i)$ and $\{\RM{B}_i\}$ is partition of $\Omega$
+\NEW BAYES $P(\RM{B}_k|\RM{A}) = \frac{P(\RM{B}_k)P(\RM{A}|\RM{B}_k)}{\sum_i P(\RM{B}_i)P(A|\RM{B}_i)}$ where $P(\RM{B}_k)$ prior, $P(\RM{A}|\RM{B}_k)$ likelihood, $P(\RM{B}_k|\RM{A})$ posterior
+\NEW $\RM{A},\RM{B}\in\mathfrak{B}$ independent $\Leftrightarrow P(\RM{A}\RM{B}) = P(\RM{A})P(\RM{B})$
+\NEW $\RM{A},\RM{B}$ disjoint iff $P(\RM{A}\RM{B}) = 0$
+\topic{random variables \& distributions}
+\NEW functions of RV are also RV (MLE are RV)
+\NEW binomial distribution: $P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$ where $n$ trials, $k$ successes, $p$ prob of success
+\NEW expected value: $E[X] = \sum_x x P(X=x)$
+\NEW variance: $Var[X] = E[(X-E[X])^2] = E[X^2] - E[X]^2$
+\NEW LINEAR REGRESSION: find threshold by minimizing sum of least squares (min distance from line to pts)
+\NEW lacks robustness to outliers for classification
+
+\topic{max likelihood estimate}
+\NEW bias of estimator is difference between estimator and true value (expected value of error of the estimator)
+\NEW take formula for estimate, take log for log-likelihood then differentiate and set to 0 for max likelihood estimate
+\NEW derivative for log: $\frac{\partial }{\partial dx} \ln f(x) = \frac{1}{f(x)} \frac{\partial f(x)}{\partial dx}$
+\NEW $L(\theta) = \prod_i^n f(x_i|\theta)$ then $\ln L(\theta) = \sum_i^n \ln f(x_i|\theta)$
+\NEW maximize by taking derivative wrt $\theta$ so $\hat{\theta} = \argmax_\theta \ln L(\theta)$
+\NEW gaussian: likelihood $L(\theta) = \prod_i^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x_i-\mu)^2}{2\sigma^2}\right)$ then $\ln L(\theta) = \sum_i^n \ln \frac{1}{\sqrt{2\pi\sigma^2}} - \frac{(x_i-\mu)^2}{2\sigma^2}$ so $\frac{\partial \ln L(\theta)}{\partial \mu} = \sum_i^n \frac{x_i-\mu}{\sigma^2} = 0$ gives $\hat{\mu} = \frac{\sum_i^n x_i}{n}$ and $\frac{\partial \ln L(\theta)}{\partial \sigma^2} = \sum_i^n \frac{(x_i-\mu)^2}{2\sigma^4} - \frac{n}{2\sigma^2} = 0$ gives $\hat{\sigma}^2 = \frac{\sum_i^n (x_i-\hat{\mu})^2}{n}$($\hat{\mu}$ unbiased, $\hat{\sigma}^2$ biased unless true $\mu$ known)
+\NEW bernoulli: likelihood $L(\theta) = \prod_i^n p^{x_i} (1-p)^{1-x_i}$ then $\ln L(\theta) = \sum_i^n x_i \ln p + (1-x_i) \ln (1-p)$ so $\frac{\partial \ln L(p)}{\partial p} = \frac{\sum_i^n x_i}{p} - \frac{\sum_i^n (1-x_i)}{1-p} = 0$ so $\hat{p} = \frac{\sum_i^n x_i}{n}$
+\NEW uniform: likelihood $L(\theta) = \prod_i^n \frac{1}{b-a}$ then $\ln L(\theta) = \sum_i^n \ln \frac{1}{b-a}$ so $\frac{\partial \ln L(\theta)}{\partial a} = \sum_i^n \frac{1}{b-a} = 0$ so $\hat{a} = \min_i x_i$ and $\frac{\partial \ln L(\theta)}{\partial b} = \sum_i^n \frac{1}{b-a} = 0$ so $\hat{b} = \max_i x_i$
+
+\topic{naive bayes classifier}
+\NEW probabilistic model for classification, generative, models $P(X,Y)$ joint distribution, using $P(X|Y)$ likelihood conditional distribution to compute $P(Y|X)$ posterior
+
+\topic{gaussian naive bayes} $P(X_j=x_{ji}|Y=c_k) = \frac{1}{\sqrt{2\pi\sigma_{jk}^2}} \exp\left(-\frac{(x_{ji}-\mu_{jk})^2}{2\sigma_{jk}^2}\right)$
+\NEW num indep param in non-naive gaussian classifer: $d^2 +3d+1$ (1 for class prior. for each class label, we have d for mean vector of Gaussian and $(1 + .. + d)$ for the co-variance matrix)
+\NEW num indep param in naive gauss classifer: 4d+1 (1 for class prior.  label for each dimension of the feature, we have 1 for mean of Gaussian and 1 for the variance)
+
+\topic{bernoulli naive bayes} $P(X_j=x_{ji}|Y=c_k) = \begin{cases} \theta_{jk} & \text{if } x_{ji} = 1 \\ 1-\theta_{jk} & \text{if } x_{ji} = 0 \end{cases}$\NEW naive params: $P(Y=c_k)$ prior prob for $k-1$ classes, $P(X_j=x_{ji}|Y=c_k)$ cond prob for $j\in\{1,..,d\}$ and $k\in\{1,..,K\}$ (e.g. p(temp=hot|y=1), p(temp=hot|y=2), p(temp=hot|y=3))
+\NEW num indep parameters for non-naive: $(k\text{-}1)$ prior prob, $v^d\text{-}1$ cond prob per $k$ so total: $k\cdot(v^d\text{-}1) + k - 1$
+\NEW naive assumption indep params:  $(k\text{-}1)$ prior prob, $d$ features for cond prob per $k$ so total $k\cdot d + k - 1$
+\NEW decision boundary: $P(Y=c_k|X=x) = \frac{P(X=x|Y=c_k)P(Y=c_k)}{P(X=x)} \propto P(X=x|Y=c_k)P(Y=c_k)$
+
+\topic{logistic regression}
+\NEW probabilistic model for classification, discriminative (directly models $P(Y|X)$ posterior)
+\NEW leads to linear classifer
+\NEW number of independent parameters: $d$ features for cond prob per $k$ so total $d+1$
+\NEW "learning" parameter $\eta$ controls slope of sigmoid function or speed at which updates happen to the weight params ($\eta= \theta^\trans x$ where $\theta$ weight vector, $x$ feature vector)
+\NEW computing final values of param for logistic reg requires grandient ascent (max likelihood)
+\NEW sigmoid function $\sigma(t) = \frac{1}{1+\exp(-t)}$ where $\frac{\partial}{\partial t}\sigma(t) = \sigma(t)(1-\sigma(t))$
+\NEW estimate params $\theta$ by maximizing log-likelihood $\ln L(\theta) = \sum_i^n \ln P(Y=y_i|X=x_i;\theta)$
+\NEW probaility of data given params $P(Y=y_i|X=x_i;\theta) = \sigma(\theta^\trans x_i)^{y_i} (1-\sigma(\theta^\trans x_i))^{1-y_i}$
+\NEW binary model success prob: $\pi(x) = \frac{\exp(\beta_0 +\sum_i^k \beta_i x_i)}{1+\exp(\beta_0 +\sum_i^k \beta_i x_i)}$ where $\beta_0$ intercept, $\beta_1$ slope
+\NEW cross entropy loss: $E(\beta_0, \beta_1,..,\beta_k) = -\sum_i^n y_i \ln \pi(x_i) + (1-y_i) \ln (1-\pi(x_i))$
+\NEW likelihood: $L(w) = -\ln p(y|w) \ -\sum{y_i=1} \ln \pi(x_i) \ -\sum{y_i=0} \ln (1-\pi(x_i))$
+\NEW log-likelihood: $\ln L(\beta_0, \beta_1,..,\beta_k) = \sum_i^n y_i(\beta_0 +\sum_i^k \beta_i x_i) - \ln(1+\exp(\beta_0 +\sum_i^k \beta_i x_i))$
+
+\topic{SVM - linear, hard margin}
+\NEW DECISION BOUNDARY: take 2 closest pts from diff classes, find hyperplane equidistant from both, then find max margin hyperplane (max dist from hyperplane to closest point)
+\NEW distance between 2 pts $\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+\NEW decision boundary: $w^\trans x + b = 0$ where $w$ weight vector, $x$ feature vector, $b$ bias
+\NEW margin: $\frac{2}{||w||}$ where $||w||$ euclidean norm of $w$
+\NEW margin boundaries: $w^\trans x + b = 1$ and $w^\trans x + b = -1$
+\NEW classifer: $y_{(i)}= +1$ if $w^\trans x_{(i)} + b \geq 1$; $y_{(i)}= -1$ if $w^\trans x_{(i)} + b \leq -1$
+\NEW combined form: $y_{(i)}(w^\trans x_{(i)} + b) \geq 1$ where $y_{(i)} \in \{-1,+1\}$ class label
+\fbox{ primal objective function: $\argmin_{w,b} \frac{1}{2}||w||^2$ st $y_{(i)}(w^\trans x_{(i)} + b) \geq 1$ }
+\NEW primal satisfies $a_i[y_{(i)}(w^\trans x_{(i)} + b) - 1] = 0,\ \forall i$
+\NEW if $ y_{(i)}(w^\trans x_{(i)} + b) \geq 1$ then $a_i = 0$
+\NEW if $a_i > 0$ then $y_{(i)}(w^\trans x_{(i)} + b) = 1$ (SVs)
+\NEW $w = \sum_m a_m y_{(m)} x_{(m)}$ where $m$ is set of SVs ($w$ is lin comb of SVs)
+\fbox{ dual objective function: $\max_\alpha \sum_i \alpha_i - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j y_{(i)} y_{(j)} x_{(i)}^\trans x_{(j)}$ st $\alpha_i \geq 0$ and $\sum_i \alpha_i y_{(i)} = 0$ }
+\NEW in lagrangian dual form $\alpha_i$ are lagrangian multipliers, $y_{(i)}$ are class labels, $x_{(i)}$ are feature vectors, SVs are $x_{(i)}$ with $\alpha_i > 0$
+\NEW dual classifier: given opimal $a$, classify nw example $x$ as $y= +1$ if $w^\trans x + b = \sum_{m\in SV} a_i y_{(i)} x_{(i)}^\trans x + b \geq 0$; $y= -1$ otherwise
+\NEW solve for b given any SV $x_{(i)} \Rightarrow b = y_{(i)} - \sum_{m\in SV} a_m y_{(m)} x_{(m)}^\trans x_{(i)}$
+\NEW less effective when data noisy and pts overlap - problem drawing clear hyperplane without misclassification
+\NEW KERNEL TRICK: maps non-linear separable data into a higher dimensional space to find a hyperplane that can separate the samples (defines inner product in transformed space) (e.g. $x_1^2 + x_2^2$ quadratic feature map)
+
+\topic{SVM - non-linear, soft margin}
+\NEW slack variables $\xi_i \geq 0$ allow for misclassified pts (penalize misclassified pts)
+\NEW very small slack variables $\xi_i$ near 0 will misclassify pts
+\NEW $\xi_i=0$ correctly classified, $0< \xi_i \leq 1$ correctly classified but on wrong side of margin boundary (margin violation), $\xi_i>1$ misclassified
+\NEW pos $x_{(i)}$: $\xi_i \geq 1 - (w^\trans x_{(i)} + b)$
+\NEW neg $x_{(i)}$: $\xi_i \geq (w^\trans x_{(i)} + b) - (-1)$
+\NEW combined: $y_{(i)}(w^\trans x_{(i)} + b) \geq 1 - \xi_i$
+\NEW soft-margin objective function: $\argmin_{w,b} \frac{1}{2}||w||^2 + C \sum_i \xi_i$ st $y_{(i)}(w^\trans x_{(i)} + b) \geq 1 - \xi_i$ and $\xi_i \geq 0,\ \forall i$
+\NEW SM dual: $\argmax_a \sum_i a_i - \frac{1}{2} \sum_{i,j} a_i a_j y_{(i)} y_{(j)} k(x_{(i)},x_{(j)})$ st $0 \leq a_i \leq C$ and $\sum_i a_i y_{(i)} = 0$
+\NEW SVs are $x_{(i)}$ with $0 < a_i \Rightarrow$ examples that satisfy $y_{(i)}(w^\trans x_{(i)} + b) = 1 - \xi_i$ and do not satisfy $y_{(i)}(w^\trans x_{(i)} + b) >1 $
+\NEW $C$ hyperparameter controls tradeoff between margin and misclassification (addes penaly to for each misclassified datapoint)
+\NEW large $C$ small margin, tendency to overfit training model, low bias but high variance
+\NEW small $C$ large margin, tendency to underfit training model, high bias but low variance
+\NEW hinge loss: $\argmin \sum_i \underbrace{\max(0, 1 - y_{(i)}(w^\trans x_{(i)} + b))}_{\text{hinge loss}} + \underbrace{\lambda ||w||^2}_{\text{L2 regularization}}$
+
+
+% \rule{\linewidth}{0.4pt}
+% $\star \circledast \heartsuit \diamondsuit \spadesuit \bigstar \clubsuit \longleftrightarrow \longleftrightarrow $
+% $\begin{smallmatrix}x \\ y \\ z\end{smallmatrix}$
+\end{document}

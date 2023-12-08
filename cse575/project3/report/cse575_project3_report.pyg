@@ -1,0 +1,33 @@
+
+def evaluate(net, images, labels):
+# Initialize accuracy and loss to 0
+acc = 0
+loss = 0
+
+# Set batch size to 1 for evaluation
+batch_size = 1
+
+# Iterate over the images in batches
+for batch_index in range(0, images.shape[0], batch_size):
+    # Select the current batch of images and labels
+    if batch_index + batch_size < images.shape[0]:
+        data = images[batch_index : batch_index + batch_size]
+        label = labels[batch_index : batch_index + batch_size]
+    else:
+        data = images[batch_index : images.shape[0]]
+        label = labels[batch_index : labels.shape[0]]
+
+    # Forward pass through the network
+    x, y = data[0], label[0]
+    for l in range(net.lay_num):
+        output = net.layers[l].forward(x)
+        x = output
+
+    # Calculate loss using cross entropy
+    loss += cross_entropy(output, y)
+
+    # Update accuracy if the prediction is correct
+    if np.argmax(output) == np.argmax(y):
+        acc += 1
+
+return acc / images.shape[0], loss / images.shape[0]

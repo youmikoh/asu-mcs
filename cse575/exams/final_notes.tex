@@ -1,0 +1,209 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.25in]{geometry}
+\usepackage{setspace}
+\setstretch{0.9}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage[most]{tcolorbox}
+
+\usepackage{cse575}
+\raggedright
+\pagestyle{empty}
+\pagenumbering{gobble}
+\begin{document} \noindent \tiny   \setlength{\fboxsep}{0pt}
+% \purpose{final exam} \quad
+
+
+% AUTOENCODERS
+
+% CNN
+
+
+
+\smallbreak
+\topic{Bayesian Networks} belief propagation for inference problem (generalized junction tree alg), often resort to approximate methods (monte carlo sampling, variational inference)
+\NEW    [learning] learn parameters (probabilities) for given BN, estimate conditional prob given past data (learning structure is challenging/beyond scope)
+\NEW    [learning prob] use relativefrequency for estimating prob, prior distribution typically assumed, then updated by data into posterior distribution using MLE principle (EM alg often used)
+\NEW    [complexity] $D$ discrete variables having $m$ values, then join prob table has $m^D$ rows $\Rightarrow$ ($m^D$-1) independent parameters to specify the distribution
+\NEW    [markovian assumption] every variable $v$ node is conditionally independent of its non-descendants given its parents where $parents(v)$ $=$ ${u st u \rightarrow v}$, decendants of $v$ are nodes reachable from $v$ by directed path, and non-descendants are nodes not $v$, $parents(v)$, or descendants of $v$.
+\NEW    [markov blanket] $MB(v)$ of $v$ is parents(v) $\cup$ children(v) $\cup$ parents(children(v))
+\NEW    [markovian complexity] if every variable has at most $k$ parents, then MB(v) has at most 2k+$k^2$ nodes
+\NEW    [BN complexity] if every variable has m values and at most k parents, each conditional prob table (CBT) size is bounded by O($m^{k+1}$). if there are $D$ variables, then total size of all CBTs is bounded by O(D*$m^{k+1}$)
+\NEW    [joint prob] $P(x_i, ..., x_d)$ = $\prod_{i=1}^d$ $P(x_i | parents(x_i))$
+\NEW    [hidden markov models] n observations, s hidden states, e emission states. observation prob is $\Rightarrow$ $O_{ij} = P(o_i|s_j)$ and observation prob matrix has dimetion s$\times$e. state transition matrix has dimension s$\times$s $\Rightarrow$ $T_{ij} = P(s_j|s_i)$. length of path of hidden states is n.
+
+\smallbreak
+\topic{Gaussian Mixture Model} good approx of real data distributions, number of components must be given, soft class membership assigns each data point a probability of belonging to each cluster, not always guaranteed global optimum
+\NEW    $p(x)$ = $\sum_{k=1}^K$ $\pi_k$ $N(x|\mu_k, \Sigma_k)$ where $\pi_k$ is the mixing coefficient, $\mu_k$ is the mean, and $\Sigma_k$ is the covariance matrix for the kth Gaussian component. The mixing coefficients must sum to 1 and be non-negative, and the covariance matrices must be positive semi-definite.
+\NEW    $p(x)$ is the probability density function of the GMM, $x$ is the input data, $K$ is the number of mixture components, $\pi_k$ is the prior probability of the k-th component,  $N(x|\mu_k, \Sigma_k)$  is the Gaussian probability density function of the k-th component with mean $\mu_k$ and covariance matrix $\Sigma_k$.
+\NEW    [GMM] models the input data as a mixture of K Gaussian distributions, where each component is weighted by its prior probability $\pi_k$. The model is estimated by optimizing the parameters $\pi_k$, $\mu_k$, and $\Sigma_k$ using the Expectation-Maximization (EM) algorithm. Once the model is trained, it can be used to compute the probability density function of new input data.
+\NEW    [prior of the kth component] denoted by $\pi_k$, represents the prior probability that a data point belongs to the kth component of the mixture. It is a scalar value between 0 and 1 and satisfies the constraint that the sum of all priors equals 1.
+
+\smallbreak
+\topic{K-Means} unsupervised learning, clustering, given $n$ data points, cluster into $k$ clusters, each cluster has a centroid, each data point assigned to closest centroid, converges in finite steps, hard class memebership assigns each data point to a single cluster
+\NEW    [unsupervised learning] given data, find patterns, group data into clusters, find structure in data. does not rely on labeled data to find patterns. estimate overall distribution of data, figureout potential grouping of samples, fing structures of feature space, visualize big data
+\NEW    [k means] requires the number of clusters to be specified in advance. iterative algorithm that can converge to a local minimum (may not be globally optimal). sensitive to initial choice of cluster centers (poor initial choice may converget to suboptimal soln).
+\NEW    [superivsed learning] given data, find patterns, predict labels for new data. relies on labeled data to find patterns. learn a function that maps input to output. classify new data into predefined categories (supervised/semi-superivsed). minimize the prediction error between the predicted and actual outputs (goal for supervised learning where prediction error minimzied).
+\NEW    [loss] N distict points with K clusters, loss is $\sum{i=1}^k$ $\sum{x \in D_i}$ $||x-\mu_i||^2$ where $\mu_i$ is centroid of cluster $i$ and $D_i$ is set of points in cluster $i$. least possible value of loss is 0, and it will happen when there are N distinct points and we are looking to find N clusters.
+\NEW    use a good similairy measure meaningful for a given problem to get good clustering, Minimizing the sum of distances within clusters, Choose the point furthest from the previous centers for better performance, multiple runs for better performance
+\NEW    On every iteration of K-means, the cost function should either stay the same or decrease (in particular, it should not increase). Completely different clusters may arise from small changes in the initial random choice.
+
+
+
+\smallbreak
+\topic{Graph Cut}
+\NEW    [laplacian matrix] a matrix representation of a graph that can be used to find the minimum cut of the graph. The Laplacian matrix is defined as L=D-A, where D is the degree matrix and A is the adjacency matrix of the graph. The degree matrix is a diagonal matrix where $D_{ii}$ is the degree of node $i$, and the adjacency matrix is a matrix where $A_{ij}$ is 1 if there is an edge between nodes $i$ and $j$ and 0 otherwise. The Laplacian matrix is symmetric and positive semi-definite ($x^TLx\geq0$),and min eigenvalue is 0. The eigenvector that corresponds to the second minimum eigenvalue $\lambda_2$ gives the best bipartite graph partition
+\NEW    [spectral gap] smallest non-zero eigenvalue of L
+\NEW    [adjacency matrix of undirected graph] is a symmetric matrix
+\NEW    [cluster membership vector q]  $q_i$=1 if $i \in A$ cluster, else -1. vector q = $\operatorname{argmin}_{q\in [-1,1]^n}$ CutSize where Cursize = J = 1/4 $\sum_{i,j}$ $(q_i- q_j )^2$ $w_{i,j}$ relaxed to $q = \operatorname{argmin}_{q}$ $q^T$ (D-W)q where D degree matrix, W weight matrix $\Rightarrow$ the second minimum eigenvector for D-W $\Rightarrow$ (D-W)q = $\lambda_2$q
+\NEW    [simple strategy] A={i|$q_i$<0}, B={i|$q_i$$\geq$0}
+\NEW    Cut(A,B)=$\sum_{i\in A, j\in B}$ $w_{ij}$, Cut(A,A)=$\sum_{i\in A, j\in B}$ $w_{ij}$, Vol(A) = $\sum_{i\in A}$$\sum_{i=1}^n$ $w_{ij}$, |A|=num vertices in A
+\NEW    [MinCut] a way to find a cut in a graph that minimizes the number of edges between the two partitions. In other words, it is a partition of the graph into two disjoint subsets that minimizes the number of edges connecting the two subsets. Mincut can be used for clustering by treating the graph as a set of points and the edges between them as similarities. neither considers inter-cluster nor intra-cluster similarity. MinCut=Cut(A,B)
+\NEW    [RatioCut] similar to mincut, but it is a more balanced clustering algorithm. It works by minimizing the ratio of the number of edges between the two partitions to the total number of edges in the graph. This ensures that the two partitions are of roughly equal size, rather than one partition being much smaller than the other. RaioCut=Cut(A,B)*(1/|A| + 1/|B|)
+\NEW    [NCut] a clustering algorithm that takes into account the normalized cut size of a partition. Normalized cut size is a measure of how well the graph has been partitioned,
+taking into account both the number of edges between the partitions and the size of the partitions. NCut is designed to produce balanced clusters and has been shown to work well on a variety of data sets. NCut=Cut(A,B)*(1/Vol(A) + 1/Vol(B))
+\NEW    [MinMaxCut] 1st constrant: inter-connection should be minimized (MinCut(A,B)) and 2nd constraint: intra-connection should be maximized: (MaxCut(A,A), MaxCut(B,B)). MinMaxXCut(A,B) = Cut(A,B)*(1/Cut(A,A) + 1/Cut(B,B))
+\NEW    dataset with pairwise similarity -- chose MinCut
+\NEW    2-way partition choose eivenvenctor corresponding to 2nd smallest eigenvalue of Laplacian matrix
+\NEW    MinMaxCut, RatioCut, NCut considers "size" of parititions, NCut considers size of set based on weights of edges
+\NEW    spectral clustering does not make strong assumption on the forms of the cluster, may be sensitive to choice of parameters fro neighborhood graph
+\NEW    [k-way partition] apply 2-way partition recursively, generalizing 2-way objective function to consider k clusters directly.  Using 2-way partitioning recursively to get k-way partition is inefficient and may cause stability issues.
+\NEW    [similarity graphs] consider $\epsilon$-neighborhood, k-nearest neighbor, fully connected graphs
+
+\smallbreak
+\topic{Principal Component Analysis} unsupervised learning, dimensionality reduction, feature extraction, data compression, data visualization, primary purpose to reduce the number of input features (e.g. removing a column that contains identical entries), A feature is in general mapped from original features, and thus cannot be easily linked to any single dimension of the original features.
+\NEW   [dimensionality reduction] reduce the number of features in a dataset while preserving the most important information in the data. This can be useful for reducing the computational cost of training a model, reducing the amount of memory required to store the data, and visualizing high-dimensional data in a lower-dimensional space. (e.g. Independent component analysis (ICA), PCA, Non-negative matrix factorization (NMF), t-distributed stochastic neighbor embedding (t-SNE), Autoencoders)
+\NEW    dimensionality reduction alg performs well if reconstruction error (the smaller the better)
+\NEW    linear dimensionality reduction technique used to find a low-dimensional representation of high-dimensional data. It is commonly used to reduce the number of variables or features of a dataset and to better understand the underlying structure of the data. PCA works by identifying the directions in which the data varies the most and projecting the data onto those directions.
+\NEW    searches for the directions that data have the largest variance, all principal components are orthogonal to each other
+\NEW    if eigenvalue is roughly equal, PCA will not be very useful for dimensionality reduction
+\NEW    [first principal component] the direction in which the data varies the most. The second principal component is the direction that is orthogonal to the first principal component and captures the next highest amount of variance in the data. Subsequent principal components are defined in a similar way. The principal components are sorted in order of the amount of variance they capture in the data.
+\NEW sum of eigenvalues == total variance
+\NEW    [STEP1: Center the data] subtract the mean of the data from each data point to center the data around the origin
+\NEW    [STEP2: Compute the covariance matrix] compute the covariance matrix of the data -- cov matrix =  [[var(x), cov(x,y)], [cov(x,y), var(y)]], variance = $\sum_{i=1}^n$ $(x_i - \mu)^2$ / (n-1),
+\NEW    [STEP3: Compute the eigenvectors and eigenvalues of the covariance matrix] compute the eigenvectors and eigenvalues of the covariance matrix. The eigenvectors are the principal components of the data, and the eigenvalues represent the amount of variance that each principal component captures. |C - $\lambda$I| = 0
+\NEW    [STEP4: Choose the first principal component] choose the eigenvector corresponding to the largest eigenvalue as the first principal component. find the corresponding eigenvector by plugging the eigenvalue back into the equation and solving Cv = $\lambda$v. eigenvectors must be unit vectors, convert this vector into a unit vector, we need to divide by its magnitude e.g. 1/$\sqrt{2}$ [1,1] = [$1/\sqrt{2}$, $1/\sqrt{2}$]
+\NEW    [STEP5] Obtain the weight matrix and project the data,  we need to transpose the eigenvector into a weight matrix, W = $[1/\sqrt{2}, 1/\sqrt{2}]^T$ Using this weight matrix, we can now project the data and obtain the result with a dimensionality reduced to one-dimension. For each point $x_i$, we can find the reduced dimensionality projection as: $x_i$ = W$X_i^T$. e.g. reduced dimensionality dataset is:[$-6/\sqrt{2}$, $1/\sqrt{2}$,$1/\sqrt{2}$, $-1/\sqrt{2}$]
+
+
+
+\smallbreak
+example. (0,0), (-1,2), (-3,6), (1,-2), (3,-6) $\Rightarrow$ $\mu_x$=0, $mu_y$=0, mean=(0,0), centered data =[(0-0,0-0),(-1-0, 2-0),(-3-0, 6-0),(1-0,-2-0),(3-,0-6-0)],  variance = $\sum_{i=1}^n$ $(x_i - \mu)^2$ / n, var(x) =  0+1+9+1+9/5 = 20/5 = 4, var(y)=0+4+36+4+36/5 = 80/5 = 16, cov(x,y) =  $\sum_{i=1}^n$ $(x_i - \mu_x)(y_i - \mu_y)$ / n = 0-2-18-2-18/5 = -40/5 = -8, cov matrix =  [[var(x), cov(x,y)], [cov(x,y), var(y)]] = [[4,-8],[-8,16]]. Let A be a square matrix,  v a vector and $\lambda$ a scalar that satisfies Av= $\lambda$v, then $\lambda$ is called the eigenvalue associated with the eigenvector v of A. det(A - $\lambda$I ) = 0 (I - Identity matrix) $\Rightarrow$ det([[4-$\lambda$,-8],[-8,16-$\lambda$]]) = 0 $\Rightarrow$ (4-$\lambda$)(16-$\lambda$) - (-8)(-8) = 0 $\Rightarrow$ $\lambda^2$ - 20$\lambda$ + 64 = 0 $\Rightarrow$ $\lambda$ = 0, 20 (eigenvalues). so $\lambda$=0 $\Rightarrow$ Cv=$\lambda$v = [[4, -8],[-8,16]][$x_1$, $y_1$] = 0[$x_1$, $y_1$] $\Rightarrow$ $x_1$=2$y_1$.  $\lambda$=0 $\Rightarrow$ Cv=$\lambda$v =  [[4, -8],[-8,16]][$x_1$, $y_1$] = 20[$x_1$, $y_1$] $\Rightarrow$ 2$x_2$=2$y_2$.  choose the eigenvector corresponding to the largest eigenvalue as the first principal component. Let, $y_1$=1 and $x_2$ = 1. (We can choose any number)
+Then, $y_2$ = -2 , $x_1$ = 2, Eigenvector = $1^2$+$(-2)^2$ =$\sqrt{5}$. first principle component = (1/$\sqrt{5}$ , -2/$\sqrt{5}$) (This is for $\lambda$ = 20). second principle component = (2/$\sqrt{5}$,1/$\sqrt{5}$) (This is for$\lambda$ = 0) *** use (n-1) for var/cov if n small
+
+
+\smallbreak
+\topic{Back Propagation}
+\NEW    [supervised] requires a labeled dataset to train the neural network. The inputs and outputs of the network must be known
+in advance for each training example.
+\NEW    [iterative] requires multiple passes through the training dataset. During each pass, the weights and biases of the network are adjusted to reduce the error between the predicted outputs and the true labels.
+\NEW    [gradient descent optimization] adjusts the weights and biases of the network using the gradient of the error function with respect to the weights and biases.
+\NEW    [2 phases] forward phase, where the input is propagated through the network to produce an output, and the backward phase, where the error is propagated back through the network to update the weights and biases.
+\NEW    [differentiable activation function] requires the activation function of the neurons to be differentiable, so that the gradients can be calculated and propagated back through the network
+\NEW    [vanishing gradient problem] In deep neural networks, the gradients can become very small as they are propagated back through the network, leading to slow convergence or no convergence at all. Techniques such as weight initialization, batch normalization, and residual connections can help mitigate this problem.
+\NEW    [100\% training accuracy for Multi-layer perceptron] generally not always possible to achieve 100\% training accuracy for a Multi-Layer Perceptron (MLP) on all datasets, particularly when dealing with complex, real-world problems. However, for simple and linearly separable datasets, it may be possible to achieve 100\% training accuracy with an MLP. This is because the decision boundary between classes is a straight line or a hyperplane, which can be learned by a single-layer MLP. This is because the decision boundary between classes is a straight line or a hyperplane, which can be learned by a single-layer MLP.
+\NEW backprop to distribute the output error proportionally to the nodes in the hidden layers.
+
+
+\smallbreak
+\topic{Convolutional Neural Network} type of neural network that is commonly used for image and video processing applications because of its ability to preserve spatial information. It is also used for natural language processing tasks such as text classification and sentiment analysis.
+\NEW   input image is passed through a series of convolutional layers, each of which applies a set of filters to the input to extract certain features. These filters are learned during training and are used to identify patterns in the image that are important for the given task. The output of the convolutional layers is then passed through one or more fully connected layers, which perform the final classification.
+\NEW   [number of kernels]  in a convolutional layer defines the number of filters that are applied to the input image in that layer. Each kernel extracts a specific feature from the input image, and the output of the layer is a set of feature maps, one for each kernel. The number of kernels in a convolutional layer is a hyperparameter that is typically determined through trial and error, and a larger number of kernels can allow the network to learn more complex features in the input image. However, increasing the number of kernels also increases the computational cost and can lead to overfitting if not properly regularized.
+\NEW    w + e*$x_i$ where w is weight, e is error, $x_i$ is input
+\NEW neuron fires when it receives a sufficient number of signals from other neurons within a timeframe.
+\NEW MLP neuron network has output, hidden, input
+\NEW $\sigma(x)$ = 1/(1+$e^{-x}$), differential = $\sigma(x)(1-\sigma(x))$
+\NEW use relu to improve vanish gradient problem
+\NEW FALSE: The drop-out technique uses the backpropagation algorithm to update the weights of all nodes, including the deactivated nodes.
+\NEW TRUE: The drop-out technique randomly deactivates some hidden nodes. For any input, the drop-out technique calculates the output using the activated nodes only. the drop-out technique uses the back propagation algorithm to update the weights of active nodes only.
+\NEW TRUE: CNNs use convolution for filtering. CNNs use a pooling layer to reduce the dimensionality of feature maps.  CNNs devise a solution to decrease the number of parameters used in a deep neural network.
+\NEW FALSE: The CNNs devise a solution to increase the number of parameters used in a deep neural network.
+\NEW The purpose of the pooling layer in CNNs is to reduce the dimensionality of feature maps.
+\NEW FALSE: AlexNet performance was below 80%.
+\NEW TRUE: AlexNet was the first prominent network to feature ReLU. AlexNet had more parameters than LeNet. AlexNet featured multi-GPU training.
+
+
+
+
+
+
+\smallbreak
+\topic{Generative Adversarial Networks} are a type of deep learning model that involve two networks: a generator and a discriminator. GANs are based on a game-theoretic scenario. formed of 2 networks
+\NEW   [goal] to generate new data that is similar to a set of training data. The generator network takes a random input and produces a sample that is intended to be similar to the training data, while the discriminator network tries to distinguish between the generated samples and the real training data.
+\NEW   [training] the generator and discriminator are trained together in a minimax game. The generator tries to produce samples that the discriminator cannot distinguish from the real training data, while the discriminator tries to correctly identify the generated samples as fake. As the training progresses, the generator learns to produce more realistic samples, while the discriminator becomes better at identifying fake samples. The training process continues until the generator produces samples that are difficult to distinguish from real data.
+\NEW   [applications] generating images, videos, and other types of data. image synthesis, style transfer, and video prediction.
+\NEW   [for each step] Update the discriminator by ascending its stochastic gradient, Update the generator by descending its stochastic gradient, generate a batch of data samples.
+
+
+
+\smallbreak
+\NEW deep networ for image classification - Image Aesthetics evaluation using Parallel Deep CNN,  Multi-Patch Aggregation Network for Image Style, Rating Pictorial Aesthetics using deep learning (RAPID), NOT KMEANS
+\NEW Diabetic retinopathy -  The CNN architecture, named Inception-v3
+\NEW relative aesthetics by gattupalli - weight sharing networks, relative lables, cnn trained by relative learning, NOT DATASET WITHOUT LABELS
+\NEW classification of images better solution than naive -- using sptio-temporal features, NOT SMALLER IMG< NOT USER RBG FOR FEATURES, NOT IMAGES WITHOUT LABELS
+\NEW types used in global temporal rep of video data -- motion info, appearance info NOT SD of features
+\NEW sematic video embedding space key idea - associate sematic words with vector rep of video data (NOT COMPRESSION, TRANSFORM TO HD SPACE, REDUCING DIM OF FEATURE SPCACE)
+\NEW LEARNING fixed nerual network -- adapting weights in response to input/ouput pairs
+\NEW neuron computes linear function followed by activation func
+
+\smallbreak
+\topic{ pooling} Apply the average-pooling operation on the input below using a 2x2 kernel and stride - x -
+[
+[1 3 3 6]
+[2 1 2 7]
+[6 6 8 2]
+[8 7 5 1]
+]
+\NEW  With Stride = 1x1, we shift our 2x2 kernel one step at a time in either the horizontal or
+vertical direction. This means that the resulting output matrix will be of size 3x3. So, starting at the top-lef The average of these values is taken ((1+3+2+1)/4 = 7/4 = 1.75) etc.
+[
+[1.75 2.25 4.5]
+[3.75 4.25 4.75]
+[6.75 6.5 4]
+]
+\NEW Using a stride of 2x2, the process is the same as in part (a), except that we need to shift
+two steps in the horizontal of vertical direction when moving the kernel. The result is
+that the output matrix will be of size 2x2.
+[[1.75 4.5]
+[6.75 4]
+]
+\smallbreak
+\NEW For the max-pooling operation, we take the values under the kernel and select the single largest value and place it into the corresponding spot in the output matrix.  The original input matrix is 6x6, however we are instructed to add a single layer of padding around it which yields:
+[[0 0 0 0 0 0 0 0]
+[0 2 4 6 7 8 9 0]
+[0 7 8 6 2 1 7 0]
+[0 2 5 8 1 3 0 0]
+[0 1 3 4 7 0 1 0]
+[0 7 8 5 5 1 7 0]
+[0 6 5 3 1 7 1 0]
+[0 0 0 0 0 0 0 0]]
+
+\NEW So, for example, when we start our max-pooling operation at the top-left of the input matrix, we will include the top and left layers of padding when placing our kernel and get max(0, 0, 0, 0,2,4,0,7,8)=8 finally
+[[8 8 8 8 9 9]
+[8 8 8 8 9 9]
+[8 8 8 8 7 7]
+[8 8 8 8 7 7]
+[8 8 8 7 7 7]
+[8 8 8 7 7 7]]
+
+\smallskip
+
+\topic{Auto-encoder} Unsupervised learning, Consider yi being an approximation of xi.
+\NEW Consider two cases 1. Much fewer hidden nodes than input nodes 2. Many hidden nodes or more hidden nodes than input nodes
+\NEW Case 1: Encoder for compressing input and compressed data should still be able to reconstruct the input similar to pca
+\NEW Case 2: Allow more hidden nodes than input -- Allow more freedom for the input- to-hidden layer mapping in exploring structure of the input data, Additional “regularization” will be needed in order to find meaningful results
+
+\smallskip
+\topic{Recurrent Neural Networks } Feedforward networks: Neurons are interconnected without any cycle in the connection, Recurrent neural networks: Allow directed cycles in connections between neurons (Notion of “state” or temporal dynamics - Necessity of internal memory)
+\NEW One clear benefit: Such networks could naturally model variable-length sequential data
+\NEW A basic, illustrative architecture for RNN (showing only one node each layer)
+\NEW Training with BP algorithm may suffer from so-called vanishing gradient problem
+\NEW Some RNN variants have sophisticated “recurrence” structures, invented in part to address such difficulties faced by basic RNN models
+\NEW The “Long short-term memory” (LSTM) model -used to produce state-of-the-art results in speech and language applications
+\NEW The Gated Recurrent Unit model (GRU) - a simplified version of LSTM, also used in speech and language applications
+
+\end{document}

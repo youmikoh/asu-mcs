@@ -1,0 +1,22 @@
+person(a;b;c;d;e;f;g).
+
+has_disease(X) :- carries_virus(X), &weight("1.5").
+carries_virus(Y) :- contact(X, Y), carries_virus(X), &weight("1.1").
+
+carries_virus(a).
+contact(a,(b;c;d)).
+contact(e,(f;g)).
+contact(f,g).
+
+contact(X,Y) :- contact(Y,X).
+
+#show carries_virus/1.
+#show has_disease/1.
+
+% plingo virus.plp --all
+% plingo virus.plp --frontend=lpmln
+% plingo virus.plp --query='carries_virus'
+% plingo virus.plp --query='carries_virus(a)'
+% plingo virus.plp --query='has_disease(a)'
+% plingo virus.plp --evid='virus.evid' --query='has_disease'
+

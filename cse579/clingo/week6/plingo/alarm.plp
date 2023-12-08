@@ -1,0 +1,40 @@
+pf(t) :- &log("0.02/0.98").
+pf(f) :- &log("0.01/0.99").
+pf(a,t1f1) :- &log("0.5/0.5").
+pf(a,t1f0) :- &log("0.85/0.15").
+pf(a,t0f1) :- &log("0.99/0.01").
+pf(a,t0f0) :- &log("0.0001/0.9999").
+
+pf(s,f1) :- &log("0.9/0.1").
+pf(s,f0) :- &log("0.01/0.99").
+
+pf(l,a1) :- &log("0.88/0.12").
+pf(l,a0) :- &log("0.001/0.999").
+
+pf(r,l1) :- &log("0.75/0.25").
+pf(r,l0) :- &log("0.01/0.99").
+
+tampering :- pf(t).
+
+fire :- pf(f).
+
+alarm :- tampering, fire, pf(a,t1f1).
+alarm :- tampering, not fire, pf(a,t1f0).
+alarm :- not tampering, fire, pf(a,t0f1).
+alarm :- not tampering, not fire, pf(a,t0f0).
+
+smoke :- fire, pf(s,f1).
+smoke :- not fire, pf(s,f0).
+
+leaving :- alarm, pf(l,a1).
+leaving :- not alarm, pf (l,a0).
+
+report :- leaving, pf(r,l1).
+report :- not leaving, pf(r,l0).
+
+% plingo alarm.plp --all
+% plingo alarm.plp --frontend=lpmln
+% plingo alarm.plp --frontend=lpmln --query='fire'
+% plingo alarm.plp --frontend=lpmln --evid='alarm.evid' --query='fire'
+% plingo alarm.plp --frontend=lpmln --evid='alarm.evid' --query='leaving'
+

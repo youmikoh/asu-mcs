@@ -1,0 +1,3 @@
+% :- not migratoryBird(jo).
+
+:- not bird(jo).

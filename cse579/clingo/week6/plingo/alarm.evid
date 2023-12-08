@@ -1,0 +1,6 @@
+% :- not alarm.
+% :- tampering.
+
+:- not fire.
+% :- fire.
+% :- not leaving.

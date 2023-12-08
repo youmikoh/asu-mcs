@@ -6,15 +6,36 @@ authors = ["Youmi Koh <youmi.koh@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.12"
 opencv-python = "^4.7.0.72"
 jupyter = "^1.0.0"
 notebook = "^6.5.4"
-numpy = "1.23"
+numpy = "^1.23"
 h5py = "^3.8.0"
 clingo = "^5.6.2"
 cffi = "^1.15.1"
 plingo = "^1.1.0"
+pandas = "^2.0.3"
+matplotlib = "^3.7.2"
+scipy = "^1.11.1"
+pydantic = "1.10"
+black = {extras = ["jupyter"], version = "^23.7.0"}
+ruff = "^0.0.284"
+scikit-learn = "^1.3.0"
+keras = "2.13.1"
+tensorflow = "2.13"
+tensorflow-macos = "2.13.0"
+pygments = "^2.16.1"
+pymunk = {version = "^6.5.1",  extras = ["all"]}
+noise = "^1.2.2"
+pygame = "^2.5.2"
+torch = "^2.1.0"
+torchtext = "^0.16.1"
+transformers = "^4.35.2"
+datasets = "^2.15.0"
+nltk = "^3.8.1"
+seaborn = "^0.13.0"
+pytorch-lightning = "^2.1.2"
 
 
 [tool.poetry.group.dev.dependencies]

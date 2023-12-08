@@ -1,0 +1,59 @@
+% cse571.sty
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cse571}
+
+\usepackage{tikz}
+
+\usepackage{titlesec}
+% \titlespacing*{\section}{2pt}{2pt}{2pt}
+% \titlespacing*{\subsection}{1pt}{1pt}{1pt}
+\renewcommand{\familydefault}{\ttdefault}
+% \everymath{\displaystyle\scriptstyle}
+
+\newcommand{\uline}[1]{\underline{#1}}
+
+\newcommand{\purpose}[1]{{\footnotesize #1}}
+\newcommand{\topic}[1]{{\scriptsize #1}}
+\newcommand{\stopic}[1]{{\footnotesize #1}}
+\newcommand{\RM}[1]{\mathrm{#1}}
+\newcommand{\BF}[1]{{\mathbf{#1}}}
+\newcommand{\MX}[1]{{\mathbf{#1}}}
+
+\newcommand{\THN}{\Rightarrow}
+\newcommand{\By}{\,\mathsf{x}\,}
+\newcommand{\by}{\mathsf{x}}
+
+
+\newcommand{\argmin}{\RM{argmin}}
+\newcommand{\argmax}{\RM{argmax}}
+\newcommand{\trans}{\mathsf{T}}
+\newcommand{\trace}{\RM{tr}}
+\newcommand{\inv}{{\text{-}1}}
+\newcommand{\vecx}{\mathbf{x}}
+
+
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\NEW}{\ensuremath{\clubsuit } }
+\newcommand{\NXT}{\ensuremath{\blacktriangleright } }
+
+\newcommand{\NEWdi}{\ensuremath{\blacklozenge } }
+\newcommand{\NEWsp}{\ensuremath{\spadesuit } }
+\newcommand{\NEWst}{\ensuremath{\bigstar } }
+
+\newcommand{\condind}{\perp \!\!\! \perp}
+
+
+\colorlet{circle edge}{black!99}
+\colorlet{circle area}{gray!20}
+
+\tikzset{
+    filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick},
+    dot/.style = {circle, inner sep=0pt, minimum size=1mm, fill, node contents={}}
+}
+
+\endinput

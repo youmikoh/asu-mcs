@@ -1,4 +1,19 @@
 .DS_Store
 
-*.pdf
-*.docx
+# cache
+__pycache__/
+.ipynb_checkpoints
+
+# data files
+*.gz
+*.zip
+*.csv
+
+# LaTeX intermediate files
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.blg
+*.bbl

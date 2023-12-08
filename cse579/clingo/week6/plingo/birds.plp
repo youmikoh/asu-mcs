@@ -1,0 +1,19 @@
+bird(X) :- residentBird(X).
+bird(X) :- migratoryBird(X).
+:- residentBird(X), migratoryBird(X).
+
+% 2 residentbird(jo).
+residentBird(jo) :- &weight(2).
+
+% 1 migratorybird(jo).
+migratoryBird(jo) :- &weight(1).
+
+% plingo birds.plp --all
+% --frontend=lpmln supposed to translate hard rules
+% plingo birds.plp --frontend=lpmln
+% plingo birds.plp --query='residentBird(jo)'
+% plingo birds.plp --evid='birds.evid' --query='residentBird(jo)'
+
+% % hard rules
+% residentBird(jo).
+% migratoryBird(jo).
