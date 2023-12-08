@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ai"
+name = "asu-mcs"
 version = "0.1.0"
 description = ""
 authors = ["Youmi Koh <youmi.koh@gmail.com>"]
