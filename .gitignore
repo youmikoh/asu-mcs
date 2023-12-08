@@ -1,8 +1,15 @@
 .DS_Store
 
+
+# poetry
+poetry.lock
+
+# jupyter
+.ipynb_checkpoints
+
+
 # cache
 __pycache__/
-.ipynb_checkpoints
 
 # data files
 *.gz
